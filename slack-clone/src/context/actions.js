@@ -9,6 +9,7 @@ export function handleChange(e) {
 	this.setState({ [e.target.name]: e.target.value });
 }
 
-export function handleSubmit(id) {
-	// submit to things
+export function handleSubmit(e) {
+	e.preventDefault();
+	console.log(this.state);
 }

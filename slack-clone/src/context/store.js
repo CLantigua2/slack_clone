@@ -1,4 +1,4 @@
-import React, { component } from 'react';
+import React, { Component } from 'react';
 import * as actions from './actions';
 
 const Context = React.createContext();
@@ -7,6 +7,8 @@ export const Consumer = Context.Consumer;
 
 export class Provider extends Component {
 	state = {
+		loginName: '',
+		loginPW: '',
 		userInfo: [],
 		postInfo: []
 	};
@@ -30,3 +32,11 @@ export class Provider extends Component {
 		);
 	}
 }
+
+export const connectStore = (DependentComponent) => {
+	return class extends Component {
+		render() {
+			return <Consumer>{(context) => <DependentComponent {...context} />}</Consumer>;
+		}
+	};
+};

@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Usernameform from './components/login/UsernameForm';
+import LoginNav from './components/navbar/LoginNav';
 
-class App extends Component {
-	render() {
-		return (
-			<div className="App">
-				<Usernameform onSubmit={(username) => alert(username)} />
-			</div>
-		);
-	}
-}
+const App = () => {
+	return (
+		<React.Fragment>
+			<LoginNav />
+			<Usernameform />
+		</React.Fragment>
+	);
+};
 
 export default App;
