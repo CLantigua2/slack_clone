@@ -6,6 +6,28 @@ export function verifyUser() {
 	// else give them a warning
 }
 
+export function getAllUserInfo() {
+	axios
+		.get('http://localhost:9000/api/userInfo/')
+		.then((res) => {
+			this.setState({ allUsers: res.data });
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+
+export function getUserInfo(id) {
+	axios
+		.get(`http://localhost:9000/api/userInfo/${id}`)
+		.then((res) => {
+			this.setState({ userInfo: res.data });
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+
 // handles all form typing for the site
 export function handleChange(e) {
 	this.setState({ [e.target.name]: e.target.value });

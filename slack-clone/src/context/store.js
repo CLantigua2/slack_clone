@@ -12,6 +12,7 @@ export class Provider extends Component {
 		registerName: '',
 		registerEmail: '',
 		sidebar: false,
+		allUsers: [],
 		userInfo: [],
 		postInfo: []
 	};

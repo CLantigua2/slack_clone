@@ -4,13 +4,14 @@ const knex = require('knex');
 const morgan = require('morgan');
 const cors = require('cors');
 const knexConfig = require('./knexfile');
-const db = knex(knexConfig.development);
+// const db = knex(knexConfig.development);
 const { addUserInfo, getUserInfo, getAllUsersInfo } = require('./data/helpers/userInfoHelper.js');
 
 server.use(express.json());
 server.use(morgan('short'));
 server.use(cors());
 
+// get one user at a time
 server.get('/api/userInfo/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
@@ -21,16 +22,18 @@ server.get('/api/userInfo/:id', async (req, res) => {
 	}
 });
 
-server.get('/api/userInfo/all', (req, res) => {
-	getAllUsersInfo()
-		.then((res) => {
-			res.status(200).json(res);
-		})
-		.catch((err) => {
-			res.status(400).json({ message: 'Something went wrong, shred all the files', err });
-		});
+// get all users (doesn't work yet)
+server.get('/api/userInfo', async (req, res) => {
+	try {
+		const { users } = req.body;
+		const allUsers = await getAllUsersInfo({ users });
+		res.status(200).json(allUsers);
+	} catch (err) {
+		res.status(400).json({ message: 'you done broke something', err });
+	}
 });
 
+// create a user
 server.post('/api/userInfo/create', async (req, res) => {
 	try {
 		const newUser = req.body;
