@@ -40,7 +40,7 @@ export function handleSubmit(e) {
 	if (loginName === '' || loginEmail === '') {
 		alert('Please fill out both fields');
 	} else {
-		if (allUsers.includes(loginName) && allUsers.includes(loginEmail)) {
+		if (allUsers.includes(loginName, loginEmail)) {
 			alert('you are logged in');
 		} else {
 			alert("That user doesn't exist");
