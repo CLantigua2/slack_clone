@@ -2,7 +2,7 @@ module.exports = {
 	development: {
 		client: 'sqlite3',
 		connection: {
-			filename: './data/projects.sqlite3'
+			filename: './data/slackClone.sqlite3'
 		},
 		useNullAsDefault: true,
 		migrations: {

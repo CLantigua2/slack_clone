@@ -64,6 +64,7 @@ export const StyledSideBar = styled.div`
 	box-shadow: -4px 0px 48px -6px rgba(0, 0, 0, 0.75);
 	padding: 20px;
 	overflow-x: hidden;
+	transition: 0.3s ease-in-out;
 `;
 
 export const StyledInput = styled.input`

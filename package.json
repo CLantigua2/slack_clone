@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon"
   },
-  "author": "Carlos Lantigua <clantigua954@gmail.com>",
+  "author": "Carlos Lantigua",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
