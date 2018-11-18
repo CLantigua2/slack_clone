@@ -5,7 +5,7 @@ import { connectStore } from '../../context/store';
 
 class Sidebar extends React.Component {
 	render() {
-		const { registerName, registerEmail, handleChange, sidebar } = this.props;
+		const { registerName, registerEmail, handleChange, sidebar, registerUser } = this.props;
 		if (sidebar) {
 			return (
 				<StyledSideBar>
@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
 							happens.
 						</p>
 						<h2>Register now</h2>
-						<form action="submit">
+						<form action="submit" onSubmit={registerUser}>
 							<StyledInput
 								type="text"
 								name="registerName"

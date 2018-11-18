@@ -22,7 +22,7 @@ server.get('/api/userInfo/:id', async (req, res) => {
 	}
 });
 
-// get all users (doesn't work yet)
+// get all users
 server.get('/api/userInfo', async (req, res) => {
 	try {
 		const { users } = req.body;

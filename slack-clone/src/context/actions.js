@@ -36,9 +36,24 @@ export function handleChange(e) {
 // will handle login and maybe other stuff
 export function handleSubmit(e) {
 	e.preventDefault();
-	console.log(this.state);
+	const { loginName, loginPW } = this.state;
+	if (!loginName || !loginPW) {
+		alert('Please fill out both fields');
+	} // needs to check whats in server and compare
 }
 
 export function sidebarHandler() {
 	this.setState({ sidebar: !this.state.sidebar });
+}
+
+export function registerUser(e) {
+	e.preventDefault();
+	const { registerEmail, registerName } = this.state;
+	if (registerName === '' || registerEmail === '') {
+		alert('Please fill in the fields completely');
+	} else {
+		axios
+			.post('http://localhost:9000/api/userInfo/create', { email: registerEmail, name: registerName })
+			.catch((err) => console.log(err));
+	}
 }

@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import SlackImage from './home_illo.png';
 
 class UsernameForm extends React.Component {
+	componentDidMount() {
+		this.props.getAllUserInfo();
+	}
 	render() {
 		const { verifyUser, handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
 		return (
