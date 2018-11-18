@@ -36,10 +36,16 @@ export function handleChange(e) {
 // will handle login and maybe other stuff
 export function handleSubmit(e) {
 	e.preventDefault();
-	const { loginName, loginPW } = this.state;
-	if (!loginName || !loginPW) {
+	const { loginName, loginEmail, allUsers } = this.state;
+	if (loginName === '' || loginEmail === '') {
 		alert('Please fill out both fields');
-	} // needs to check whats in server and compare
+	} else {
+		if (allUsers.includes(loginName) && allUsers.includes(loginEmail)) {
+			alert('you are logged in');
+		} else {
+			alert("That user doesn't exist");
+		}
+	}
 }
 
 export function sidebarHandler() {

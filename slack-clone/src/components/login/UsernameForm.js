@@ -8,6 +8,7 @@ class UsernameForm extends React.Component {
 		this.props.getAllUserInfo();
 	}
 	render() {
+		console.log(this.props.loginEmail);
 		const { verifyUser, handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
