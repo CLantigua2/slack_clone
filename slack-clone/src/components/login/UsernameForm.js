@@ -5,7 +5,7 @@ import SlackImage from './home_illo.png';
 
 class UsernameForm extends React.Component {
 	render() {
-		const { verifyUser, handleChange, handleSubmit, loginName, loginEmail } = this.props;
+		const { verifyUser, handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
 				<StyledImg src={SlackImage} alt="Slack Workers" />
@@ -34,7 +34,7 @@ class UsernameForm extends React.Component {
 						<StyledButton type="submit">
 							<span>Login</span>
 						</StyledButton>
-						<StyledRegister type="submit">
+						<StyledRegister type="button" onClick={() => sidebarHandler()}>
 							<span>Register</span>
 						</StyledRegister>
 					</div>

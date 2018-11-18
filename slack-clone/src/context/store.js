@@ -9,6 +9,9 @@ export class Provider extends Component {
 	state = {
 		loginName: '',
 		loginEmail: '',
+		registerName: '',
+		registerEmail: '',
+		sidebar: false,
 		userInfo: [],
 		postInfo: []
 	};
