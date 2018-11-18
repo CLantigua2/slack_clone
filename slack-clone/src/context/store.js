@@ -8,7 +8,7 @@ export const Consumer = Context.Consumer;
 export class Provider extends Component {
 	state = {
 		loginName: '',
-		loginPW: '',
+		loginEmail: '',
 		userInfo: [],
 		postInfo: []
 	};

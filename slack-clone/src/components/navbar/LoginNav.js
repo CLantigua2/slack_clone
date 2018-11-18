@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import SlackLogo from './SlackLogo';
+import SlackLogo from './SlackLogo.PNG';
 
 const loginNav = () => {
 	const nav = [ 'Why Slack?', 'Solutions', 'Resources', 'Pricing' ];
-	const logo = SlackLogo;
 
 	return (
 		<StyledContainer>
-			<img src={logo} />
+			<img alt="slacklogo" src={SlackLogo} />
 			{nav.map((link, idx) => {
 				return (
 					<StyledATag href="/" key={idx}>
@@ -23,14 +22,21 @@ const loginNav = () => {
 export default loginNav;
 
 export const StyledContainer = styled.div`
-	width: 100%;
+	width: 550px;
 	display: flex;
 	flex-direction: row;
-	margin: 20px;
-	padding: 20px;
+	align-items: center;
+	justify-content: space-around;
+	margin: 20px auto;
 `;
 
 export const StyledATag = styled.a`
 	margin-right: 20px;
 	text-decoration: none;
+	color: #6d6f7b;
+
+	&:hover {
+		font-weight: 700;
+		color: #000000;
+	}
 `;
