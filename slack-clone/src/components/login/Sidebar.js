@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import logo from '../navbar/SlackLogo.PNG';
 import { connectStore } from '../../context/store';
 
+// this is the sidebar component for the main login page
 class Sidebar extends React.Component {
 	render() {
 		const { registerName, registerEmail, handleChange, sidebar, registerUser } = this.props;
+		// if the sidebar state is true present sidebar
 		if (sidebar) {
 			return (
 				<StyledSideBar>
@@ -22,6 +24,7 @@ class Sidebar extends React.Component {
 							happens.
 						</p>
 						<h2>Register now</h2>
+						{/* registerUser posts user data to the server */}
 						<form action="submit" onSubmit={registerUser}>
 							<StyledInput
 								type="text"

@@ -3,12 +3,16 @@ import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
 
+// home page form
 class UsernameForm extends React.Component {
+	// get all users from the server
 	componentDidMount() {
 		this.props.getAllUserInfo();
 	}
 	render() {
+		// testing the user input values
 		console.log(this.props.loginName, this.props.loginEmail);
+		// all of this is coming from the context store
 		const { verifyUser, handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
@@ -25,6 +29,7 @@ class UsernameForm extends React.Component {
 						name="loginName"
 						value={loginName}
 						placeholder="Username..."
+						// handles form value changes
 						onChange={handleChange}
 					/>
 					<StyledInput
@@ -32,12 +37,14 @@ class UsernameForm extends React.Component {
 						name="loginEmail"
 						value={loginEmail}
 						placeholder="Email..."
+						// handles form value changes
 						onChange={handleChange}
 					/>
 					<div>
 						<StyledButton type="submit">
 							<span>Login</span>
 						</StyledButton>
+						{/* sidebarHandler posts registration data to the server || currently being worked on */}
 						<StyledRegister type="button" onClick={() => sidebarHandler()}>
 							<span>Register</span>
 						</StyledRegister>
@@ -48,6 +55,7 @@ class UsernameForm extends React.Component {
 	}
 }
 
+// connect context store to this component using HOC
 export default connectStore(UsernameForm);
 
 export const StyledContainer = styled.div`

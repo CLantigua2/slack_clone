@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-// verify if a user has registered
-export function verifyUser() {
-	// if user has registered, let them through
-	// else give them a warning
-}
-
+// gets a list of all the users in the server
 export function getAllUserInfo() {
 	axios
 		.get('http://localhost:9000/api/userInfo/')
@@ -17,6 +12,7 @@ export function getAllUserInfo() {
 		});
 }
 
+// get a single users info and sends to userInfo in store
 export function getUserInfo(id) {
 	axios
 		.get(`http://localhost:9000/api/userInfo/${id}`)
@@ -40,7 +36,7 @@ export function handleSubmit(e) {
 	if (loginName === '' || loginEmail === '') {
 		alert('Please fill out both fields');
 	} else {
-		if (allUsers.includes(loginName, loginEmail)) {
+		if (allUsers.includes({ loginName }, { loginEmail })) {
 			alert('you are logged in');
 		} else {
 			alert("That user doesn't exist");
@@ -48,10 +44,12 @@ export function handleSubmit(e) {
 	}
 }
 
+// handles the submit for the sidebar only
 export function sidebarHandler() {
 	this.setState({ sidebar: !this.state.sidebar });
 }
 
+// sends user register name and email to server
 export function registerUser(e) {
 	e.preventDefault();
 	const { registerEmail, registerName } = this.state;
