@@ -1,10 +1,7 @@
 express = require('express');
 const server = express();
-const knex = require('knex');
 const morgan = require('morgan');
 const cors = require('cors');
-const knexConfig = require('./knexfile');
-// const db = knex(knexConfig.development);
 const { addUserInfo, getUserInfo, getAllUsersInfo } = require('./data/helpers/userInfoHelper.js');
 
 server.use(express.json());

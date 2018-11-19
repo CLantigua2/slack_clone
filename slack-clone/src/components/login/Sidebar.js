@@ -53,6 +53,7 @@ class Sidebar extends React.Component {
 	}
 }
 
+// connects this component to the context store
 export default connectStore(Sidebar);
 
 export const StyledSideBar = styled.div`

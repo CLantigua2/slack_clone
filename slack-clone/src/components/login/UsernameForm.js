@@ -13,7 +13,7 @@ class UsernameForm extends React.Component {
 		// testing the user input values
 		console.log(this.props.loginName, this.props.loginEmail);
 		// all of this is coming from the context store
-		const { verifyUser, handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
+		const { handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
 				<StyledImg src={SlackImage} alt="Slack Workers" />
