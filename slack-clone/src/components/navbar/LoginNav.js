@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import SlackLogo from './SlackLogo.PNG';
 
 const loginNav = () => {
+	// these might become links some day
 	const nav = [ 'Why Slack?', 'Solutions', 'Resources', 'Pricing' ];
 
 	return (
 		<StyledContainer>
 			<img alt="slacklogo" src={SlackLogo} />
+			{/* this just maps out the fake links for now */}
 			{nav.map((link, idx) => {
 				return (
 					<StyledATag href="/" key={idx}>
