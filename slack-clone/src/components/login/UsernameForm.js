@@ -16,6 +16,7 @@ class UsernameForm extends React.Component {
 		const { handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
+			{/* this is the main login page */}
 				<StyledImg src={SlackImage} alt="Slack Workers" />
 				<StyledForm onSubmit={handleSubmit}>
 					<StyledH1>Where Work Happens</StyledH1>

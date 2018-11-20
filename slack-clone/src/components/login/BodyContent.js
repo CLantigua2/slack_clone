@@ -18,7 +18,7 @@ const BodyContent = () => {
 			</StyledContainer>
 			<StyledBodyContainer>
 				<StyledBodyContent>
-					<StyledImgTag src={channels} alt="communication" />
+					<StyledImgTag src={channels} alt="channels" />
 					<StyledH4>Channels</StyledH4>
 					<p>
 						Communication in Slack happens in channels, organized by project, topic, team, or whatever makes
@@ -26,7 +26,7 @@ const BodyContent = () => {
 					</p>
 				</StyledBodyContent>
 				<StyledBodyContent>
-					<StyledImgTag src={search} alt="communication" />
+					<StyledImgTag src={search} alt="search" />
 					<StyledH4>Search</StyledH4>
 					<p>
 						Conversations in Slack are searchable by everyone, so you can tap into company knowledge and
@@ -34,7 +34,7 @@ const BodyContent = () => {
 					</p>
 				</StyledBodyContent>
 				<StyledBodyContent>
-					<StyledImgTag src={integrations} alt="communication" />
+					<StyledImgTag src={integrations} alt="integrations" />
 					<StyledH4>Integrations</StyledH4>
 					<p>
 						Slack works with the tools and services you already use every day. Pipe in information or take
@@ -42,7 +42,7 @@ const BodyContent = () => {
 					</p>
 				</StyledBodyContent>
 				<StyledBodyContent>
-					<StyledImgTag src={security} alt="communication" />
+					<StyledImgTag src={security} alt="security" />
 					<StyledH4>Security</StyledH4>
 					<p>
 						We take security seriously at Slack. We offer measures like 2FA and SSO to ensure the safety of
