@@ -10,12 +10,24 @@ const SlackSide = () => {
 			</div>
 			<div>
 				<form action="button">
-					<StyledButton>Jump to..</StyledButton>
+					<StyledButtonCont>
+						<StyledToolDiv>
+							<StyledIcon className="far fa-list-alt" />
+							<StyledButton>Jump to..</StyledButton>
+						</StyledToolDiv>
+					</StyledButtonCont>
 				</form>
 			</div>
 			<StyledButtonCont>
-				<StyledTools active>All Unreads</StyledTools>
-				<StyledTools>All Threads</StyledTools>
+				<StyledToolDiv>
+					<StyledIcon className="fas fa-stream" />
+					<StyledTools active>All Unreads</StyledTools>
+				</StyledToolDiv>
+
+				<StyledToolDiv>
+					<StyledIcon className="far fa-comment-dots" />
+					<StyledTools>All Threads</StyledTools>
+				</StyledToolDiv>
 			</StyledButtonCont>
 		</StyledContainer>
 	);
@@ -98,3 +110,11 @@ const StyledTools = styled.button`
 
 	${(props) => (!props.active ? `font-weight: normal; color: #1b8288;` : `color: #2abec7; font-weight: bold;`)};
 `;
+
+const StyledToolDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`;
+
+const StyledIcon = styled.i`color: #0d4347;`;
