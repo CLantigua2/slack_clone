@@ -35,9 +35,9 @@ const StyledForm = styled.form`
 
 const StyledButton = styled.button`
 	color: #919193;
-	padding: 3px 15px;
+	padding: 0 15px;
 	height: auto;
-	font-size: 40px;
+	font-size: 30px;
 	max-height: none;
 	min-height: 41px;
 	outline: 0;
@@ -47,10 +47,10 @@ const StyledButton = styled.button`
 `;
 
 const StyledInput = styled.input`
-	font-size: 30px;
+	font-size: 20px;
 	height: auto;
 	max-height: none;
-	min-height: 41px;
+	min-height: 30px;
 	overflow: auto;
 	margin: 0;
 	width: 100%;
