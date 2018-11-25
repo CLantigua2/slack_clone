@@ -7,10 +7,10 @@ export const Consumer = Context.Consumer;
 
 export class Provider extends Component {
 	state = {
-		loginName: '',
-		loginEmail: '',
-		registerName: '',
-		registerEmail: '',
+		logUsername: '',
+		logPassword: '',
+		regUsername: '',
+		regPassword: '',
 		sidebar: false,
 		allUsers: '',
 		userInfo: [],

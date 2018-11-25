@@ -11,12 +11,12 @@ class UsernameForm extends React.Component {
 	}
 	render() {
 		// testing the user input values
-		console.log(this.props.loginName, this.props.loginEmail);
+		console.log(this.props.logUsername, this.props.logPassword);
 		// all of this is coming from the context store
-		const { handleChange, handleSubmit, loginName, loginEmail, sidebarHandler } = this.props;
+		const { handleChange, handleSubmit, logUsername, logPassword, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
-			{/* this is the main login page */}
+				{/* this is the main login page */}
 				<StyledImg src={SlackImage} alt="Slack Workers" />
 				<StyledForm onSubmit={handleSubmit}>
 					<StyledH1>Where Work Happens</StyledH1>
@@ -27,17 +27,17 @@ class UsernameForm extends React.Component {
 					</p>
 					<StyledInput
 						type="text"
-						name="loginName"
-						value={loginName}
+						name="logUsername"
+						value={logUsername}
 						placeholder="Username..."
 						// handles form value changes
 						onChange={handleChange}
 					/>
 					<StyledInput
 						type="text"
-						name="loginEmail"
-						value={loginEmail}
-						placeholder="Email..."
+						name="logPassword"
+						value={logPassword}
+						placeholder="Password..."
 						// handles form value changes
 						onChange={handleChange}
 					/>

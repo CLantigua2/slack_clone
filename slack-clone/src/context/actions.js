@@ -32,11 +32,11 @@ export function handleChange(e) {
 // will handle login and maybe other stuff
 export function handleSubmit(e) {
 	e.preventDefault();
-	const { loginName, loginEmail, allUsers } = this.state;
-	if (loginName === '' || loginEmail === '') {
+	const { logUsername, logPassword, allUsers } = this.state;
+	if (logUsername === '' || logPassword === '') {
 		alert('Please fill out both fields');
 	} else {
-		if (allUsers.includes({ loginName }, { loginEmail })) {
+		if (allUsers.includes({ logUsername }, { logPassword })) {
 			alert('you are logged in');
 		} else {
 			alert("That user doesn't exist");
@@ -52,12 +52,12 @@ export function sidebarHandler() {
 // sends user register name and email to server
 export function registerUser(e) {
 	e.preventDefault();
-	const { registerEmail, registerName } = this.state;
-	if (registerName === '' || registerEmail === '') {
+	const { regPassword, regUsername } = this.state;
+	if (regUsername === '' || regPassword === '') {
 		alert('Please fill in the fields completely');
 	} else {
 		axios
-			.post('http://localhost:9000/api/userInfo/create', { email: registerEmail, name: registerName })
+			.post('http://localhost:9000/api/userInfo/create', { password: regPassword, username: regUsername })
 			.catch((err) => console.log(err));
 	}
 }

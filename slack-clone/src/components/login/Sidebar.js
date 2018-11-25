@@ -6,7 +6,7 @@ import { connectStore } from '../../context/store';
 // this is the sidebar component for the main login page
 class Sidebar extends React.Component {
 	render() {
-		const { registerName, registerEmail, handleChange, sidebar, registerUser } = this.props;
+		const { regUsername, registerPassword, handleChange, sidebar, registerUser } = this.props;
 		// if the sidebar state is true present sidebar
 		if (sidebar) {
 			return (
@@ -28,16 +28,16 @@ class Sidebar extends React.Component {
 						<form action="submit" onSubmit={registerUser}>
 							<StyledInput
 								type="text"
-								name="registerName"
-								value={registerName}
+								name="regUsername"
+								value={regUsername}
 								placeholder="Username..."
 								onChange={handleChange}
 							/>
 							<StyledInput
 								type="text"
-								name="registerEmail"
-								value={registerEmail}
-								placeholder="Email..."
+								name="regPassword"
+								value={regPassword}
+								placeholder="Password..."
 								onChange={handleChange}
 							/>
 							<StyledButton type="submit">
