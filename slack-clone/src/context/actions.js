@@ -3,7 +3,7 @@ import axios from 'axios';
 // gets a list of all the users in the server
 export function getAllUserInfo() {
 	axios
-		.get('http://localhost:9000/userInfo/')
+		.get('http://localhost:9000/users/')
 		.then((res) => {
 			this.setState({ allUsers: res.data });
 		})
@@ -15,7 +15,7 @@ export function getAllUserInfo() {
 // get a single users info and sends to userInfo in store
 export function getUserInfo(id) {
 	axios
-		.get(`http://localhost:9000/userInfo/${id}`)
+		.get(`http://localhost:9000/users/${id}`)
 		.then((res) => {
 			this.setState({ userInfo: res.data });
 		})

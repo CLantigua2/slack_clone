@@ -6,7 +6,7 @@ import { connectStore } from '../../context/store';
 // this is the sidebar component for the main login page
 class Sidebar extends React.Component {
 	render() {
-		const { regUsername, registerPassword, handleChange, sidebar, registerUser } = this.props;
+		const { regUsername, regPassword, handleChange, sidebar, registerUser } = this.props;
 		// if the sidebar state is true present sidebar
 		if (sidebar) {
 			return (

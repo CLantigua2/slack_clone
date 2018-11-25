@@ -1,17 +1,14 @@
 import React from 'react';
 import './App.css';
-import Usernameform from './components/login/UsernameForm';
-import LoginNav from './components/navbar/LoginNav';
-import BodyContent from './components/login/BodyContent';
+import LogContainer from './components/login/LogContainer';
 import SlackSide from './components/slackApp/SlackSide';
+import { Route } from 'react-router';
 
 const App = () => {
 	return (
 		<React.Fragment>
-			<SlackSide />
-			{/* <LoginNav />
-			<Usernameform />
-			<BodyContent /> */}
+			<Route exact path="/slack" component={SlackSide} />
+			<Route path="/" component={LogContainer} />
 		</React.Fragment>
 	);
 };

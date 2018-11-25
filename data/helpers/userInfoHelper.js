@@ -5,7 +5,8 @@ const db = knex(knexConfig.development);
 module.exports = {
 	getUser,
 	getAllUsers,
-	addUser
+	addUser,
+	removeUser
 };
 
 function getUser(id) {
@@ -18,4 +19,8 @@ function getAllUsers() {
 
 function addUser(user) {
 	return db('userInfo').insert(user).then((ids) => ({ id: ids[0] }));
+}
+
+function removeUser(id) {
+	return db('userInfo').delete(user).where({ id });
 }

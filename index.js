@@ -3,14 +3,14 @@ const server = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const { addUser, getUser, getAllUsers } = require('./data/helpers/userInfoHelper.js');
+const { addUser, getUser, getAllUsers, removeUser } = require('./data/helpers/userInfoHelper.js');
 
 server.use(express.json());
 server.use(morgan('short'));
 server.use(cors());
 
 // get one user at a time
-server.get('/user/:id', async (req, res) => {
+server.get('/users/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
 		const user = await getUser(id);
@@ -41,6 +41,17 @@ server.post('/register', async (req, res) => {
 		res.status(200).json(user);
 	} catch (err) {
 		res.status(400).json({ message: 'Missing some information', err });
+	}
+});
+
+// remove a user
+server.delete('/delete/:id', async (req, res) => {
+	try {
+		const { id } = req.params;
+		const deleteUser = await removeUser({ id });
+		res.status(200).json(deleteUser);
+	} catch (err) {
+		res.status(400).json({ message: 'you done broke something' });
 	}
 });
 
