@@ -26,12 +26,11 @@ const StyledContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-left: 220px;
 	margin-right: 0px;
 	background: #fff;
 	padding: 5px;
+	width: 100%;
 	height: 100%;
-	box-shadow: inset 1px 0 0 0 #e8e8e8;
 	box-sizing: border-box;
 	line-height: 1rem;
 	font-size: 16px;
@@ -58,7 +57,14 @@ const StyledInput = styled.input`
 	border-radius: .35rem;
 	border: 1px solid #919193;
 	font-family: NotoSansJP, Slack-Lato, appleLogo, sans-serif;
-	:hover {
+	transition: 0.3s ease-in-out;
+	&:hover {
 		border-color: #717274;
+	}
+	&:focus {
+		border: 1px solid #919193;
+		border-radius: .35rem;
+		width: 350px;
+		z-index: 3;
 	}
 `;
