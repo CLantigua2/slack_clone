@@ -3,7 +3,7 @@ import axios from 'axios';
 // gets a list of all the users in the server
 export function getAllUserInfo() {
 	axios
-		.get('http://localhost:9000/api/userInfo/')
+		.get('http://localhost:9000/userInfo/')
 		.then((res) => {
 			this.setState({ allUsers: res.data });
 		})
@@ -15,7 +15,7 @@ export function getAllUserInfo() {
 // get a single users info and sends to userInfo in store
 export function getUserInfo(id) {
 	axios
-		.get(`http://localhost:9000/api/userInfo/${id}`)
+		.get(`http://localhost:9000/userInfo/${id}`)
 		.then((res) => {
 			this.setState({ userInfo: res.data });
 		})
@@ -57,7 +57,7 @@ export function registerUser(e) {
 		alert('Please fill in the fields completely');
 	} else {
 		axios
-			.post('http://localhost:9000/api/userInfo/create', { password: regPassword, username: regUsername })
+			.post('http://localhost:9000/register', { password: regPassword, username: regUsername })
 			.catch((err) => console.log(err));
 	}
 }
