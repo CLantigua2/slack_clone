@@ -46,6 +46,7 @@ const StyledContainer = styled.div`
 	left: 0;
 	background: #000e0f;
 	overflow: hidden;
+	z-index: 200;
 `;
 
 const StyledHeader = styled.h3`
