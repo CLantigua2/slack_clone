@@ -1,11 +1,11 @@
 express = require('express');
-const server = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
 const { registerUser, getUser, getAllUsers, removeUser, logIn } = require('./data/helpers/userInfoHelper.js');
 const session = require('express-session');
+const server = express();
 
 server.use(express.json());
 server.use(morgan('short'));
@@ -20,7 +20,7 @@ const sessionConfig = {
 	saveUninitialized: false, // laws ?
 	cookie: {
 		secure: false, // over http(S) in production change to true
-		maxAge: 1000 * 60 * 5
+		maxAge: 1000 * 60 * 30
 	}
 };
 
@@ -62,7 +62,7 @@ server.get('/users/:id', async (req, res) => {
 });
 
 /////////////// register a user
-server.post('/register', async (req, res) => {
+server.post('/register', restricted, async (req, res) => {
 	try {
 		const creds = req.body;
 		const hash = bcrypt.hashSync(creds.password, 14);
@@ -74,7 +74,7 @@ server.post('/register', async (req, res) => {
 	}
 });
 
-// remove a user
+/////////////// remove a user
 server.delete('/delete/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
@@ -85,7 +85,7 @@ server.delete('/delete/:id', async (req, res) => {
 	}
 });
 
-// login a user
+///////////// login a user
 server.post('/login', restricted, (req, res) => {
 	const creds = req.body;
 	logIn()
