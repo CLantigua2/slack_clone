@@ -64,7 +64,7 @@ const StyledInput = styled.input`
 	&:focus {
 		border: 1px solid #919193;
 		border-radius: .35rem;
-		width: 350px;
+		transform: scaleX(1.15) scaleY(1.1);
 		z-index: 3;
 	}
 `;
