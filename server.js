@@ -1,111 +1,104 @@
-express = require('express');
-const morgan = require('morgan');
+const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
-const { registerUser, getUser, getAllUsers, removeUser, logIn } = require('./data/helpers/userInfoHelper.js');
-const session = require('express-session');
-const server = express();
-
-server.use(express.json());
-server.use(morgan('short'));
-server.use(cors());
-server.use(helmet());
+const morgan = require('morgan');
+const db = require('./data/dbConfig.js');
+const session = require('express-session'); // brints in session library
+const knexSessionStore = require('connect-session-knex')(session);
 
 const sessionConfig = {
-	secret: 'Random.Weird.Things.That.I.Tell.My.Dog',
-	name: 'banana', // defaults to connect.sid
-	httpOnly: true, // JS can't access, only https
-	resave: false,
-	saveUninitialized: false, // laws ?
+	secret: `${process.env.SESSION_SECRET}`,
+	name: `${process.env.SESSION_NAME}`, // defaults to connect.sid
 	cookie: {
 		secure: false, // over http(S) in production change to true
-		maxAge: 1000 * 60 * 30
-	}
+		maxAge: 1000 * 60 * 5
+	},
+	httpOnly: true, // JS can't access, only https
+	resave: false,
+	saveUninitialized: false, // has something to do with foreign laws
+	store: new knexSessionStore({
+		// creates memcache
+		tablename: 'sessions', // session table name
+		sidfiledname: 'sid', //session field name
+		knex: db, // what database you want to knex to use
+		createtable: true, // have the library create the table if there isn't one
+		clearInterval: 1000 * 60 * 60 // clear every hour
+	})
 };
 
-server.use(session(sessionConfig));
+const server = express();
+server.use(session(sessionConfig)); // wires up session management
+server.use(express.json());
+server.use(cors());
+server.use(helmet());
+server.use(morgan('short'));
 
-restricted = (req, res, next) => {
-	if (req.session && req.session.username) {
-		next();
-	} else {
-		res.status(401).json({ message: 'Invalid credentials' });
-	}
-};
-
-////////////// test server
 server.get('/', (req, res) => {
 	res.send('Server is running');
 });
 
-////////////// get all users
-server.get('/users', async (req, res) => {
-	try {
-		const { users } = req.body;
-		const allUsers = await getAllUsers({ users });
-		res.status(200).json(allUsers);
-	} catch (err) {
-		res.status(400).json({ message: 'you done broke something', err });
+function restricted(req, res, next) {
+	// if logged in
+	if (req.session && req.session.userId) {
+		// they're logged in, go ahead and provide access
+		next();
+	} else {
+		// bounce them
+		res.status(401).json({ message: 'Invalid credentials' });
 	}
+}
+
+// get all user id and usernames
+server.get('/users', restricted, (req, res) => {
+	db('userInfo')
+		.select('id', 'username')
+		.then((student) => res.status(400).json(student))
+		.catch((err) => res.status({ message: 'error getting that data', err }));
 });
 
-////////////// get one user at a time
-server.get('/users/:id', async (req, res) => {
-	try {
-		const { id } = req.params;
-		const user = await getUser(id);
-		res.status(200).json(user);
-	} catch (err) {
-		res.status(400).json({ message: 'user not found', err });
-	}
-});
-
-/////////////// register a user
-server.post('/register', restricted, async (req, res) => {
-	try {
-		const creds = req.body;
-		const hash = bcrypt.hashSync(creds.password, 14);
-		creds.password = hash;
-		const user = await registerUser(creds);
-		res.status(200).json(user);
-	} catch (err) {
-		res.status(400).json({ message: 'Missing some information', err });
-	}
-});
-
-/////////////// remove a user
-server.delete('/delete/:id', async (req, res) => {
-	try {
-		const { id } = req.params;
-		const deleteUser = await removeUser({ id });
-		res.status(200).json(deleteUser);
-	} catch (err) {
-		res.status(400).json({ message: 'you done broke something' });
-	}
-});
-
-///////////// login a user
-server.post('/login', restricted, (req, res) => {
+// register a user by username and password
+server.post('/users/register', (req, res) => {
 	const creds = req.body;
-	logIn()
+	const hash = bcrypt.hashSync(creds.password, 14);
+	creds.password = hash;
+	db('userInfo')
+		.insert(creds)
+		.then((ids) => {
+			res.status(201).json(ids);
+		})
+		.catch((err) => res.status(400).json(err));
+});
+
+server.post('/users/login', (req, res) => {
+	const creds = req.body;
+	db('userInfo')
 		.where({ username: creds.username })
 		.first()
 		.then((user) => {
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
-				req.session.username = user.username;
-				res.status(200).json({ message: `Welcome ${user.username}` });
+				// passwords match and user exists by that username
+				req.session.userId = user.id;
+				res.status(200).json({ message: 'welcome' });
 			} else {
-				res.status(401).json({ message: 'Invalid credentials!' });
+				// either username is invalid or password is wrong
+				res.status(401).json({ message: 'you shall not pass' });
 			}
 		})
-		.catch((err) => {
-			res.status(500).json({ err });
+		.catch((err) => res.status(500).json({ err }));
+});
+
+// logout
+server.get('/users/logout', (req, res) => {
+	if (req.session) {
+		req.session.destroy((err) => {
+			if (err) {
+				res.send('you can never logout');
+			} else {
+				res.send('you have logged out');
+			}
 		});
+	}
 });
 
-const port = 9000;
-
-server.listen(port, (err) => {
-	err ? console.log(err) : console.log(`This Port is over ${port}!!!`);
-});
+server.listen(9000, () => console.log('this port is over 9000!'));
