@@ -4,7 +4,7 @@
   "description": "backend server for slack clone",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon"
   },
   "repository": "https://github.com/CLantigua2/slack_clone",
   "author": "Carlos Lantigua",
@@ -23,5 +23,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.7"
+
   }
 }

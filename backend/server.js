@@ -9,12 +9,10 @@ server.use(cors());
 server.use(helmet());
 
 //test server
-server.get('/', (_, res) => {
+server.get('/', (req, res) => {
 	res.send('server is live');
 });
 
 // pass server to configureRoute function
 configureRoutes(server);
-module.exports = {
-	server
-};
+module.exports = { server };

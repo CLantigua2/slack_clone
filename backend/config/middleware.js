@@ -14,8 +14,7 @@ function generateToken(user) {
 		userId: user.id,
 		username: user.username,
 		firstname: user.firstname,
-		lastname: user.lastname,
-		dateofbirth: user.dateofbirth
+		lastname: user.lastname
 	};
 	const secret = jwtKey;
 	const options = {

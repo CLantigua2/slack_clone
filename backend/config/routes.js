@@ -12,7 +12,7 @@ module.exports = (server) => {
 // for user registration
 function register(req, res) {
 	const creds = req.body;
-	const hash = bcrypt.hashSync(creds, password, 16);
+	const hash = bcrypt.hashSync(creds.password, 16);
 	creds.password = hash;
 	db('users')
 		.insert(creds)
