@@ -10,10 +10,8 @@ class UsernameForm extends React.Component {
 		this.props.getAllUserInfo();
 	}
 	render() {
-		// testing the user input values
-		console.log(this.props.logUsername, this.props.logPassword);
 		// all of this is coming from the context store
-		const { handleChange, handleSubmit, logUsername, logPassword, sidebarHandler } = this.props;
+		const { handleChange, handleSubmit, username, password, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
 				{/* this is the main login page */}
@@ -27,16 +25,16 @@ class UsernameForm extends React.Component {
 					</p>
 					<StyledInput
 						type="text"
-						name="logUsername"
-						value={logUsername}
+						name="username"
+						value={username}
 						placeholder="Username..."
 						// handles form value changes
 						onChange={handleChange}
 					/>
 					<StyledInput
 						type="text"
-						name="logPassword"
-						value={logPassword}
+						name="password"
+						value={password}
 						placeholder="Password..."
 						// handles form value changes
 						onChange={handleChange}
