@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const jwt = require('jsonwebtoken');
 const jwtKey = process.env.SECRET_KEY;
 
@@ -12,9 +11,7 @@ module.exports = {
 function generateToken(user) {
 	const payload = {
 		userId: user.id,
-		username: user.username,
-		firstname: user.firstname,
-		lastname: user.lastname
+		username: user.username
 	};
 	const secret = jwtKey;
 	const options = {
