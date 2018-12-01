@@ -44,13 +44,10 @@ function login(req, res) {
 
 // for getting a list of users
 function getUsers(req, res) {
-	const users = req.body;
 	db('users')
-		.select('username', 'firstname', 'lastename', 'age')
-		.then((folks) => {
-			res.status(200).json({ users });
+		.select('id', 'username', 'firstname', 'lastname') // ***************************** added password to the select
+		.then((users) => {
+			res.json(users);
 		})
-		.catch((err) => {
-			res.status(500).json({ message: 'Error Fetching Users', error: err });
-		});
+		.catch((err) => res.send(err));
 }
