@@ -31,8 +31,8 @@ export function handleChange(e) {
 	this.setState({ [e.target.name]: e.target.value });
 }
 
-// will handle login and maybe other stuff
-export function handleSubmit(e) {
+// hanels user sign in from the front page
+export function signIn(e) {
 	e.preventDefault();
 	const { username, password } = this.state;
 	if (username === '' || password === '') {
@@ -43,6 +43,7 @@ export function handleSubmit(e) {
 			.then((res) => {
 				localStorage.setItem('jwt', res.data.token);
 				this.setState({ username: '', password: '' });
+				this.props.history.push('/slackapp');
 			})
 			.catch((err) => {
 				console.log('ERROR', err);

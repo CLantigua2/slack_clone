@@ -7,7 +7,7 @@ import { Route } from 'react-router';
 const App = () => {
 	return (
 		<React.Fragment>
-			<Route exact path="/slackapp" component={SlackContainer} />
+			<Route path="/slackapp" component={SlackContainer} />
 			<Route path="/" component={LogContainer} />
 		</React.Fragment>
 	);

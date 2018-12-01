@@ -6,17 +6,18 @@ import SlackImage from './home_illo.png';
 // home page form
 class UsernameForm extends React.Component {
 	// get all users from the server
+
 	componentDidMount() {
 		this.props.getAllUserInfo();
 	}
 	render() {
 		// all of this is coming from the context store
-		const { handleChange, handleSubmit, username, password, sidebarHandler } = this.props;
+		const { handleChange, signIn, username, password, sidebarHandler } = this.props;
 		return (
 			<StyledContainer>
 				{/* this is the main login page */}
 				<StyledImg src={SlackImage} alt="Slack Workers" />
-				<StyledForm onSubmit={handleSubmit}>
+				<StyledForm onSubmit={signIn}>
 					<StyledH1>Where Work Happens</StyledH1>
 					<p>
 						When your team needs to kick off a project, hire a new employee, deploy some code, review a
