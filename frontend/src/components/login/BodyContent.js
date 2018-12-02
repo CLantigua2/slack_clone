@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from './Sidebar';
 import channels from './img/channels.png';
 import search from './img/search.png';
 import integrations from './img/integrations.png';
@@ -50,7 +49,6 @@ const BodyContent = () => {
 					</p>
 				</StyledBodyContent>
 			</StyledBodyContainer>
-			<Sidebar />
 		</div>
 	);
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
-import Link from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // home page form
 class UsernameForm extends React.Component {
@@ -43,11 +43,11 @@ class UsernameForm extends React.Component {
 							<span>Login</span>
 						</StyledButton>
 						{/* sidebarHandler posts registration data to the server || currently being worked on */}
+						<StyledRegister to="/register">
+							<span>Register</span>
+						</StyledRegister>
 					</div>
 				</StyledForm>
-				<StyledRegister type="button">
-					<span>Register</span>
-				</StyledRegister>
 			</StyledContainer>
 		);
 	}
@@ -124,9 +124,44 @@ export const StyledButton = styled.button`
 	}
 `;
 
-export const StyledRegister = styled(StyledButton)`
+export const StyledRegister = styled(Link)`
   background-color: #4CAF50;
   width: 120px;
+	display: inline-block;
+	border-radius: 4px;
+	border: none;
+	color: #ffffff;
+	text-align: center;
+	font-size: 18px;
+	padding: 10px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+
+	span {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+
+	span:after {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+
+	&:hover span {
+		padding-right: 25px;
+	}
+
+	&:hover span:after {
+		opacity: 1;
+		right: 0;
+	}
 `;
 
 export const StyledH1 = styled.h1`
