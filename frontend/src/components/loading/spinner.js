@@ -1,13 +1,21 @@
 import React from 'react';
 import spinner from './spinner.gif';
+import { connectStore } from '../../context';
 
-const Spinner = () => {
-	return (
-		<div>
-			{/* spinner to be used for when data is loading */}
-			<img src={spinner} alt="Loading..." style={{ width: '200px', margin: '40px auto', display: 'block' }} />
-		</div>
-	);
-};
+class Spinner extends React.Component {
+	render() {
+		if (this.props.loading === true) {
+			return (
+				<div>
+					<img
+						src={spinner}
+						alt="Loading..."
+						style={{ width: '200px', margin: '40px auto', display: 'block' }}
+					/>
+				</div>
+			);
+		}
+	}
+}
 
-export default Spinner;
+export default connectStore(Spinner);

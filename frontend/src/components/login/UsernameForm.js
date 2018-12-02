@@ -2,6 +2,7 @@ import React from 'react';
 import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
+import Link from 'react-router-dom';
 
 // home page form
 class UsernameForm extends React.Component {
@@ -42,11 +43,11 @@ class UsernameForm extends React.Component {
 							<span>Login</span>
 						</StyledButton>
 						{/* sidebarHandler posts registration data to the server || currently being worked on */}
-						<StyledRegister type="button" onClick={() => sidebarHandler()}>
-							<span>Register</span>
-						</StyledRegister>
 					</div>
 				</StyledForm>
+				<StyledRegister type="button">
+					<span>Register</span>
+				</StyledRegister>
 			</StyledContainer>
 		);
 	}

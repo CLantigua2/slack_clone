@@ -8,7 +8,7 @@ const LogContainer = () => {
 		<React.Fragment>
 			<UsernameForm />
 			<BodyContent />
-			<Sidebar />
+			{/* <Sidebar /> */}
 		</React.Fragment>
 	);
 };

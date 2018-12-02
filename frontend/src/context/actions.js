@@ -41,7 +41,7 @@ export function signIn(e) {
 		axios
 			.post(endpoint + 'login', { username, password })
 			.then((res) => {
-				localStorage.setItem('jwt', res.data.token);
+				!res.data.token ? this.setState({ loading: true }) : localStorage.setItem('jwt', res.data.token);
 				this.setState({ username: '', password: '', loggedIn: true });
 			})
 			.catch((err) => {
