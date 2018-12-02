@@ -42,8 +42,7 @@ export function signIn(e) {
 			.post(endpoint + 'login', { username, password })
 			.then((res) => {
 				localStorage.setItem('jwt', res.data.token);
-				this.setState({ username: '', password: '', loggedIn: !false });
-				this.props.history.push('/slack');
+				this.setState({ username: '', password: '', loggedIn: true });
 			})
 			.catch((err) => {
 				console.log('ERROR', err);

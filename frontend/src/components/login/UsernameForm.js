@@ -3,6 +3,7 @@ import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
 import { Link } from 'react-router-dom';
+import SlackContainer from '../slackApp/SlackContainer';
 
 // home page form
 class UsernameForm extends React.Component {
@@ -39,11 +40,9 @@ class UsernameForm extends React.Component {
 						onChange={handleChange}
 					/>
 					<div>
-						<Link to={this.props.loggedIn === true ? '/slackapp' : '/'}>
-							<StyledButton type="submit" onSubmit={signIn}>
-								<span>Login</span>
-							</StyledButton>
-						</Link>
+						<StyledButton type="submit">
+							<span>Login</span>
+						</StyledButton>
 						{/* sidebarHandler posts registration data to the server || currently being worked on */}
 						<StyledRegister type="button" onClick={() => sidebarHandler()}>
 							<span>Register</span>
