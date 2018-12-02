@@ -17,9 +17,9 @@ export function getAllUserInfo() {
 // get a single users info and sends to userInfo in store
 export function getUserInfo(id) {
 	axios
-		.get(`${endpoint}${id}`)
+		.get(`${endpoint}user/:${id}`)
 		.then((res) => {
-			this.setState({ userInfo: res.data });
+			this.setState({ userStuff: res.data });
 		})
 		.catch((err) => {
 			console.log(err);

@@ -2,8 +2,6 @@ import React from 'react';
 import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
-import { Link } from 'react-router-dom';
-import SlackContainer from '../slackApp/SlackContainer';
 
 // home page form
 class UsernameForm extends React.Component {

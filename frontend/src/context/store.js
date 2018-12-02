@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as actions from './actions';
+import axios from 'axios';
 
 const Context = React.createContext();
 
@@ -13,10 +14,27 @@ export class Provider extends Component {
 		lastname: '',
 		loggedIn: false,
 		sidebar: false,
-		allUsers: '',
-		userInfo: [],
+		userStuff: [],
+		allUsers: [],
 		postInfo: []
 	};
+
+	componentDidMount() {
+		setInterval(() => {
+			const endpoint = 'http://localhost:9000/api/';
+
+			// gets a list of all the users in the server
+			axios
+				.get(`${endpoint}users`)
+				.then((res) => {
+					this.setState({ allUsers: res.data });
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}, 5000);
+	}
+
 	attachMethods = (data_obj) => {
 		return Object.keys(data_obj).reduce((obj, prop) => {
 			obj[prop] = data_obj[prop].bind(this);
