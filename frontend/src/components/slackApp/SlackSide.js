@@ -36,6 +36,7 @@ const SlackSide = () => {
 export default SlackSide;
 
 const StyledContainer = styled.div`
+	background: #ffffff;
 	display: flex;
 	flex-direction: column;
 	padding-left: 15px;

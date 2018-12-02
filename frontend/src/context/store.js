@@ -11,6 +11,7 @@ export class Provider extends Component {
 		password: '',
 		firstname: '',
 		lastname: '',
+		loggedIn: false,
 		sidebar: false,
 		allUsers: '',
 		userInfo: [],

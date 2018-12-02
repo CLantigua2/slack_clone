@@ -1,7 +1,7 @@
 import React from 'react';
 import spinner from './spinner.gif';
 
-export default () => {
+const Spinner = () => {
 	return (
 		<div>
 			{/* spinner to be used for when data is loading */}
@@ -9,3 +9,5 @@ export default () => {
 		</div>
 	);
 };
+
+export default Spinner;

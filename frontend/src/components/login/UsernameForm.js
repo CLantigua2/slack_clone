@@ -2,17 +2,15 @@ import React from 'react';
 import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
+import { Link } from 'react-router-dom';
 
 // home page form
 class UsernameForm extends React.Component {
-	// get all users from the server
+	// handls user sign in from the front page
 
-	componentDidMount() {
-		this.props.getAllUserInfo();
-	}
 	render() {
 		// all of this is coming from the context store
-		const { handleChange, signIn, username, password, sidebarHandler } = this.props;
+		const { handleChange, username, password, sidebarHandler, signIn } = this.props;
 		return (
 			<StyledContainer>
 				{/* this is the main login page */}
@@ -41,9 +39,11 @@ class UsernameForm extends React.Component {
 						onChange={handleChange}
 					/>
 					<div>
-						<StyledButton type="submit">
-							<span>Login</span>
-						</StyledButton>
+						<Link to={this.props.loggedIn === true ? '/slackapp' : '/'}>
+							<StyledButton type="submit" onSubmit={signIn}>
+								<span>Login</span>
+							</StyledButton>
+						</Link>
 						{/* sidebarHandler posts registration data to the server || currently being worked on */}
 						<StyledRegister type="button" onClick={() => sidebarHandler()}>
 							<span>Register</span>
