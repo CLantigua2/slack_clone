@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connectStore } from '../../context/store';
+import { Link } from 'react-router-dom';
 
 class SlackSide extends React.Component {
 	componentDidMount() {
@@ -36,12 +37,16 @@ class SlackSide extends React.Component {
 				</StyledButtonCont>
 				<StyledAddChannelDiv>
 					<StyledH3>Channels</StyledH3>
-					<p>+</p>
+					<StyledNewChannel>
+						<Link to="/slackapp/createchannel">&#43;</Link>
+					</StyledNewChannel>
 				</StyledAddChannelDiv>
 				{this.props.channels.map((channel) => {
 					return (
 						<div key={channel.id}>
-							<StyledH4># {channel.channel}</StyledH4>
+							<StyledH4>
+								<Link to={`/slackapp/${channel.channel}`}># {channel.channel}</Link>
+							</StyledH4>
 						</div>
 					);
 				})}
@@ -52,10 +57,25 @@ class SlackSide extends React.Component {
 
 export default connectStore(SlackSide);
 
+const StyledNewChannel = styled.button`
+	color: #2abec7;
+	background: transparent;
+	border: 1px solid #2abec7;
+	border-radius: 50%;
+	margin-left: 87px;
+	a {
+		text-decoration: none;
+		color: #2abec7;
+		font-weight: bold;
+	}
+`;
+
 const StyledAddChannelDiv = styled.div`
+	margin-top: 20px;
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+	align-items: center;
 `;
 
 const StyledH3 = styled.h3`
@@ -67,6 +87,10 @@ const StyledH4 = styled.h4`
 	color: #2abec7;
 	margin: 0;
 	padding: 0;
+	a {
+		text-decoration: none;
+		color: #2abec7;
+	}
 `;
 
 const StyledContainer = styled.div`

@@ -2,7 +2,7 @@ import React from 'react';
 import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Button from '../tools/Button';
 
 // home page form
@@ -11,7 +11,10 @@ class Signin extends React.Component {
 
 	render() {
 		// all of this is coming from the context store
-		const { handleChange, userLog, passLog, signIn } = this.props;
+		const { handleChange, userLog, passLog, signIn, loggedIn } = this.props;
+		if (loggedIn) {
+			return <Redirect to="/slackapp" />;
+		}
 		return (
 			<StyledContainer>
 				{/* this is the main login page */}
