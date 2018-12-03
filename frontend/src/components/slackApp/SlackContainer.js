@@ -21,6 +21,6 @@ export default SlackContainer;
 const StyledContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 90%;
+	width: 80%;
 	margin-left: 220px;
 `;

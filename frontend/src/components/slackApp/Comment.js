@@ -15,9 +15,9 @@ const Comment = () => {
 export default Comment;
 
 const StyledFooter = styled.div`
-	position: absolute;
-	bottom: 0;
-	width: 90%;
+	/* position: absolute;
+	bottom: 0; */
+	width: 100%;
 	/* left: 0; */
 	box-sizing: border-box;
 	line-height: 1rem;

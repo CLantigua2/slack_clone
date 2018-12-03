@@ -10,7 +10,10 @@ module.exports = (server) => {
 	server.post('/api/login', login);
 	server.get('/api/users', authenticate, getUsers);
 	server.get('/api/user/:id', getSingleUser);
+	server.get('/api/channels', getChannels);
 };
+
+//////////////////// USER ROUTES ////////////////////////////////
 
 // for user registration
 function register(req, res) {
@@ -41,7 +44,6 @@ function login(req, res) {
 				// give the user a token to be used for access in cookie
 				const token = generateToken(user);
 				res.status(200).json({ message: 'Welcome!', token });
-				this.setState({ loggedIn: true });
 			} else {
 				res.status(401).json({ message: 'you shall not pass!!' });
 			}
@@ -72,4 +74,10 @@ function getSingleUser(req, res) {
 		.catch((err) => {
 			res.status(500).json({ message: 'There was an error', err });
 		});
+}
+
+/////////////////// Channel & Comment routes ///////////////////////
+
+function getChannels(req, res) {
+	db('channels').select('*').then((channel) => res.status(200).json(channel)).catch((err) => res.send(err));
 }

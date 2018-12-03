@@ -4,17 +4,20 @@ import styled from 'styled-components';
 
 const ChatBody = () => {
 	return (
-		<React.Fragment>
-			{this.props.userStuff.map((user) => {
-				return (
-					<div key={user.id}>
-						<h3>{user.username}</h3>
-						<p>I'm a chat body with thingys written inside of me</p>
-					</div>
-				);
-			})}
-		</React.Fragment>
+		<StyledContainer>
+			<h1>chat box here!</h1>
+			<p>
+				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor quidem corrupti ipsa? Fugit doloribus,
+				voluptatum fugiat saepe, molestiae velit accusantium, nihil quos dignissimos impedit qui earum veniam
+				expedita provident sunt.
+			</p>
+		</StyledContainer>
 	);
 };
 
 export default connectStore(ChatBody);
+
+export const StyledContainer = styled.div`
+	min-height: 88vh;
+	max-height: 800px;
+`;

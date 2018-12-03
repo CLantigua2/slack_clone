@@ -20,6 +20,7 @@ export class Provider extends Component {
 		loggedIn: false,
 		sidebar: false,
 		userStuff: [],
+		channels: [],
 		allUsers: [],
 		postInfo: []
 	};

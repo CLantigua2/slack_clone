@@ -1,39 +1,73 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connectStore } from '../../context/store';
 
-const SlackSide = () => {
-	return (
-		<StyledContainer>
-			<div>
-				<StyledHeader>Lambda School..</StyledHeader>
-				<StyledPTag>Carlos Lantigua</StyledPTag>
-			</div>
-			<div>
-				<form action="button">
-					<StyledButtonCont>
-						<StyledToolDiv>
-							<StyledIcon className="far fa-list-alt" />
-							<StyledButton>Jump to..</StyledButton>
-						</StyledToolDiv>
-					</StyledButtonCont>
-				</form>
-			</div>
-			<StyledButtonCont>
-				<StyledToolDiv>
-					<StyledIcon className="fas fa-stream" />
-					<StyledTools active>All Unreads</StyledTools>
-				</StyledToolDiv>
+class SlackSide extends React.Component {
+	componentDidMount() {
+		this.props.getAllChannels();
+	}
+	render() {
+		return (
+			<StyledContainer>
+				<div>
+					<StyledHeader>Lambda School..</StyledHeader>
+					<StyledPTag>Carlos</StyledPTag>
+				</div>
+				<div>
+					<form action="button">
+						<StyledButtonCont>
+							<StyledToolDiv>
+								<StyledIcon className="far fa-list-alt" />
+								<StyledButton>Jump to..</StyledButton>
+							</StyledToolDiv>
+						</StyledButtonCont>
+					</form>
+				</div>
+				<StyledButtonCont>
+					<StyledToolDiv>
+						<StyledIcon className="fas fa-stream" />
+						<StyledTools>All Unreads</StyledTools>
+					</StyledToolDiv>
 
-				<StyledToolDiv>
-					<StyledIcon className="far fa-comment-dots" />
-					<StyledTools>All Threads</StyledTools>
-				</StyledToolDiv>
-			</StyledButtonCont>
-		</StyledContainer>
-	);
-};
+					<StyledToolDiv>
+						<StyledIcon className="far fa-comment-dots" />
+						<StyledTools>All Threads</StyledTools>
+					</StyledToolDiv>
+				</StyledButtonCont>
+				<StyledAddChannelDiv>
+					<StyledH3>Channels</StyledH3>
+					<p>+</p>
+				</StyledAddChannelDiv>
+				{this.props.channels.map((channel) => {
+					return (
+						<div key={channel.id}>
+							<StyledH4># {channel.channel}</StyledH4>
+						</div>
+					);
+				})}
+			</StyledContainer>
+		);
+	}
+}
 
-export default SlackSide;
+export default connectStore(SlackSide);
+
+const StyledAddChannelDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+`;
+
+const StyledH3 = styled.h3`
+	color: #2abec7;
+	margin: 0;
+	padding: 0;
+`;
+const StyledH4 = styled.h4`
+	color: #2abec7;
+	margin: 0;
+	padding: 0;
+`;
 
 const StyledContainer = styled.div`
 	background: #ffffff;
@@ -58,7 +92,7 @@ const StyledHeader = styled.h3`
 `;
 
 const StyledPTag = styled.p`
-	color: #1b8288;
+	color: #2abec7;
 	margin: 0;
 	padding: 0;
 	display: list-item;
@@ -67,7 +101,7 @@ const StyledPTag = styled.p`
 `;
 
 const StyledButton = styled.button`
-	color: #1b8288;
+	color: #2abec7;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -98,19 +132,18 @@ const StyledButtonCont = styled.div`
 	overflow: hidden;
 	margin-top: 28px;
 	justify-content: flex-start;
+	color: #2abec7;
 `;
 
 const StyledTools = styled.button`
+	font-weight: bold;
 	display: flex;
 	justify-content: flex-start;
-	/* color: #2abec7; */
-	/* font-weight: bold; */
 	background: transparent;
 	border: 0;
 	font-size: 17px;
 	margin: 3px 0;
-
-	${(props) => (!props.active ? `font-weight: normal; color: #1b8288;` : `color: #2abec7; font-weight: bold;`)};
+	color: #2abec7;
 `;
 
 const StyledToolDiv = styled.div`

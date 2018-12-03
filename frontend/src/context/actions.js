@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const endpoint = 'http://localhost:9000/api/';
 
+//////////////////////// User actions //////////////////////////
+
 // gets a list of all the users in the server
 export function getAllUserInfo() {
 	axios
@@ -100,4 +102,23 @@ export function registerUser(e) {
 			});
 	}
 	e.target.reset();
+}
+
+///////////////// channel actions ///////////////////
+
+export function getAllChannels() {
+	axios
+		.get(endpoint + 'channels')
+		.then((res) => {
+			if (res.status === 200) {
+				this.setState({
+					channels: res.data
+				});
+			} else {
+				throw new Error('its broken');
+			}
+		})
+		.catch((err) => {
+			console.dir(err);
+		});
 }
