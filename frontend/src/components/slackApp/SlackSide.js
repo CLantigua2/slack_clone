@@ -38,7 +38,7 @@ class SlackSide extends React.Component {
 				<StyledAddChannelDiv>
 					<StyledH3>Channels</StyledH3>
 					<StyledNewChannel>
-						<Link to="/slackapp/createchannel">&#43;</Link>
+						<Link to="/createchannel">&#43;</Link>
 					</StyledNewChannel>
 				</StyledAddChannelDiv>
 				{this.props.channels.map((channel) => {
@@ -94,6 +94,7 @@ const StyledH4 = styled.h4`
 `;
 
 const StyledContainer = styled.div`
+	overflow-y: scroll;
 	background: #ffffff;
 	display: flex;
 	flex-direction: column;

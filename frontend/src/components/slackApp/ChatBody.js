@@ -18,6 +18,7 @@ const ChatBody = () => {
 export default connectStore(ChatBody);
 
 export const StyledContainer = styled.div`
-	min-height: 88vh;
-	max-height: 800px;
+	min-height: 87vh;
+	max-height: 500px;
+	overflow-y: auto;
 `;
