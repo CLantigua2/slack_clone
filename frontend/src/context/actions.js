@@ -85,7 +85,8 @@ export function registerUser(e) {
 						username: '',
 						password: '',
 						firstname: '',
-						lastname: ''
+						lastname: '',
+						loggedIn: true
 					});
 				} else {
 					throw new Error('its broken');

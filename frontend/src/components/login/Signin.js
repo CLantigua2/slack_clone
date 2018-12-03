@@ -32,7 +32,7 @@ class Signin extends React.Component {
 						onChange={handleChange}
 					/>
 					<StyledInput
-						type="text"
+						type="password"
 						name="passLog"
 						value={passLog}
 						placeholder="Password..."

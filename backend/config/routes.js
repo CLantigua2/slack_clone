@@ -41,6 +41,7 @@ function login(req, res) {
 				// give the user a token to be used for access in cookie
 				const token = generateToken(user);
 				res.status(200).json({ message: 'Welcome!', token });
+				this.setState({ loggedIn: true });
 			} else {
 				res.status(401).json({ message: 'you shall not pass!!' });
 			}

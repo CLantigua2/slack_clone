@@ -2,67 +2,69 @@ import React from 'react';
 import styled from 'styled-components';
 import logo from '../navbar/SlackLogo.PNG';
 import { connectStore } from '../../context/store';
+import { Redirect, Link } from 'react-router-dom';
 
 // this is the sidebar component for the main login page
 class Register extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
-		const { username, password, handleChange, registerUser, firstname, lastname } = this.props;
-		// if the sidebar state is true present sidebar
-		return (
-			<StyledSideBar>
-				<div>
-					<h1>Welcome to</h1>
-					<img src={logo} alt="slack logo" />
-					<h2>Built for every team</h2>
-					<p>
-						No matter your job title or department, Slack can help your team work together and get things
-						done.
-					</p>
-					<p>
-						Millions of people around the world have already made Slack the place where their work happens.
-					</p>
-					<h2>Register now</h2>
-					{/* registerUser posts user data to the server */}
-					<StryledForm action="submit" onSubmit={registerUser}>
-						<StyledInput
-							type="text"
-							name="username"
-							value={username}
-							placeholder="Username..."
-							onChange={handleChange}
-						/>
-						<StyledInput
-							type="password"
-							name="password"
-							value={password}
-							placeholder="Password..."
-							onChange={handleChange}
-						/>
-						<StyledInput
-							type="text"
-							name="firstname"
-							value={firstname}
-							placeholder="First Name..."
-							onChange={handleChange}
-						/>
-						<StyledInput
-							type="text"
-							name="lastname"
-							value={lastname}
-							placeholder="Last Name..."
-							onChange={handleChange}
-						/>
-						<StyledButton type="submit">
-							<span>Register</span>
-						</StyledButton>
-					</StryledForm>
-				</div>
-			</StyledSideBar>
-		);
+		const { username, password, handleChange, registerUser, firstname, lastname, loggedIn } = this.props;
+		if (loggedIn === false) {
+			return (
+				<StyledSideBar>
+					<Link to="/">Home</Link>
+					<div>
+						<h1>Welcome to</h1>
+						<img src={logo} alt="slack logo" />
+						<h2>Built for every team</h2>
+						<p>
+							No matter your job title or department, Slack can help your team work together and get
+							things done.
+						</p>
+						<p>
+							Millions of people around the world have already made Slack the place where their work
+							happens.
+						</p>
+						<h2>Register now</h2>
+						{/* registerUser posts user data to the server */}
+						<StryledForm action="submit" onSubmit={registerUser}>
+							<StyledInput
+								type="text"
+								name="username"
+								value={username}
+								placeholder="Username..."
+								onChange={handleChange}
+							/>
+							<StyledInput
+								type="password"
+								name="password"
+								value={password}
+								placeholder="Password..."
+								onChange={handleChange}
+							/>
+							<StyledInput
+								type="text"
+								name="firstname"
+								value={firstname}
+								placeholder="First Name..."
+								onChange={handleChange}
+							/>
+							<StyledInput
+								type="text"
+								name="lastname"
+								value={lastname}
+								placeholder="Last Name..."
+								onChange={handleChange}
+							/>
+							<StyledButton type="submit">
+								<span>Register</span>
+							</StyledButton>
+						</StryledForm>
+					</div>
+				</StyledSideBar>
+			);
+		} else {
+			return <Redirect to="/slackapp" />;
+		}
 	}
 }
 
