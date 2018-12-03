@@ -34,15 +34,15 @@ export function handleChange(e) {
 // handls user sign in from the front page
 export function signIn(e) {
 	e.preventDefault();
-	const { username, password } = this.state;
-	if (username === '' || password === '') {
+	const { userLog, passLog } = this.state;
+	if (userLog === '' || passLog === '') {
 		alert('username and password is required');
 	} else {
 		axios
-			.post(endpoint + 'login', { username, password })
+			.post(endpoint + 'login', { username: userLog, password: passLog })
 			.then((res) => {
 				!res.data.token ? this.setState({ loading: true }) : localStorage.setItem('jwt', res.data.token);
-				this.setState({ username: '', password: '', loggedIn: true });
+				this.setState({ userLog: '', passLog: '', loggedIn: true });
 			})
 			.catch((err) => {
 				console.log('ERROR', err);
@@ -50,9 +50,23 @@ export function signIn(e) {
 	}
 }
 
-// handles the submit for the sidebar only
-export function sidebarHandler() {
-	this.setState({ sidebar: !this.state.sidebar });
+// get all users into state
+export function getAllUsers() {
+	const endpoint = 'http://localhost:9000/api/';
+	// gets a list of all the users in the server
+	axios
+		.get(`${endpoint}users`)
+		.then((res) => {
+			const { token } = res.data;
+			if (token) {
+				this.setState({ allUsers: res.data });
+			} else {
+				return null;
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 }
 
 // sends user register name and email to server

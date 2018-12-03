@@ -5,8 +5,12 @@ import { connectStore } from '../../context/store';
 
 // this is the sidebar component for the main login page
 class Register extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
-		const { username, password, handleChange, sidebar, registerUser, firstname, lastname } = this.props;
+		const { username, password, handleChange, registerUser, firstname, lastname } = this.props;
 		// if the sidebar state is true present sidebar
 		return (
 			<StyledSideBar>
@@ -23,7 +27,7 @@ class Register extends React.Component {
 					</p>
 					<h2>Register now</h2>
 					{/* registerUser posts user data to the server */}
-					<form action="submit" onSubmit={registerUser}>
+					<StryledForm action="submit" onSubmit={registerUser}>
 						<StyledInput
 							type="text"
 							name="username"
@@ -32,7 +36,7 @@ class Register extends React.Component {
 							onChange={handleChange}
 						/>
 						<StyledInput
-							type="text"
+							type="password"
 							name="password"
 							value={password}
 							placeholder="Password..."
@@ -55,7 +59,7 @@ class Register extends React.Component {
 						<StyledButton type="submit">
 							<span>Register</span>
 						</StyledButton>
-					</form>
+					</StryledForm>
 				</div>
 			</StyledSideBar>
 		);
@@ -66,10 +70,21 @@ class Register extends React.Component {
 export default connectStore(Register);
 
 export const StyledSideBar = styled.div`
-	background-color: #ffffff;
+	width: 600px;
+	box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.41);
+
+	margin: 15% auto;
 	padding: 20px;
 	overflow-x: hidden;
 	transition: 0.3s ease-in-out;
+	border-radius: 10px;
+	background-color: #ffffff;
+`;
+
+const StryledForm = styled.form`
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const StyledInput = styled.input`

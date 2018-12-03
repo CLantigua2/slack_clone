@@ -8,10 +8,14 @@ export const Consumer = Context.Consumer;
 
 export class Provider extends Component {
 	state = {
+		//register form
 		username: '',
 		password: '',
 		firstname: '',
 		lastname: '',
+		//login form
+		userLog: '',
+		passLog: '',
 		loading: false,
 		loggedIn: false,
 		sidebar: false,
@@ -19,22 +23,6 @@ export class Provider extends Component {
 		allUsers: [],
 		postInfo: []
 	};
-
-	componentDidMount() {
-		setInterval(() => {
-			const endpoint = 'http://localhost:9000/api/';
-
-			// gets a list of all the users in the server
-			axios
-				.get(`${endpoint}users`)
-				.then((res) => {
-					this.setState({ allUsers: res.data });
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		}, 5000);
-	}
 
 	attachMethods = (data_obj) => {
 		return Object.keys(data_obj).reduce((obj, prop) => {

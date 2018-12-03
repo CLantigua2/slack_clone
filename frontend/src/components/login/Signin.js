@@ -3,14 +3,15 @@ import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import SlackImage from './home_illo.png';
 import { Link } from 'react-router-dom';
+import Button from '../tools/Button';
 
 // home page form
-class UsernameForm extends React.Component {
+class Signin extends React.Component {
 	// handls user sign in from the front page
 
 	render() {
 		// all of this is coming from the context store
-		const { handleChange, username, password, sidebarHandler, signIn } = this.props;
+		const { handleChange, userLog, passLog, signIn } = this.props;
 		return (
 			<StyledContainer>
 				{/* this is the main login page */}
@@ -24,24 +25,22 @@ class UsernameForm extends React.Component {
 					</p>
 					<StyledInput
 						type="text"
-						name="username"
-						value={username}
+						name="userLog"
+						value={userLog}
 						placeholder="Username..."
 						// handles form value changes
 						onChange={handleChange}
 					/>
 					<StyledInput
 						type="text"
-						name="password"
-						value={password}
+						name="passLog"
+						value={passLog}
 						placeholder="Password..."
 						// handles form value changes
 						onChange={handleChange}
 					/>
 					<div>
-						<StyledButton type="submit">
-							<span>Login</span>
-						</StyledButton>
+						<Button>Login</Button>
 						{/* sidebarHandler posts registration data to the server || currently being worked on */}
 						<StyledRegister to="/register">
 							<span>Register</span>
@@ -54,7 +53,7 @@ class UsernameForm extends React.Component {
 }
 
 // connect context store to this component using HOC
-export default connectStore(UsernameForm);
+export default connectStore(Signin);
 
 export const StyledContainer = styled.div`
 	display: flex;
@@ -84,52 +83,13 @@ export const StyledInput = styled.input`
 	border-radius: 5px;
 `;
 
-export const StyledButton = styled.button`
-	display: inline-block;
-	border-radius: 4px;
-	background-color: #f4511e;
-	border: none;
-	color: #ffffff;
-	text-align: center;
-	font-size: 18px;
-	padding: 10px;
-	width: 100px;
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-
-	span {
-		cursor: pointer;
-		display: inline-block;
-		position: relative;
-		transition: 0.5s;
-	}
-
-	span:after {
-		content: '\00bb';
-		position: absolute;
-		opacity: 0;
-		top: 0;
-		right: -20px;
-		transition: 0.5s;
-	}
-
-	&:hover span {
-		padding-right: 25px;
-	}
-
-	&:hover span:after {
-		opacity: 1;
-		right: 0;
-	}
-`;
-
 export const StyledRegister = styled(Link)`
   background-color: #4CAF50;
   width: 120px;
 	display: inline-block;
 	border-radius: 4px;
 	border: none;
+	font-weight: bold;
 	color: #ffffff;
 	text-align: center;
 	font-size: 18px;

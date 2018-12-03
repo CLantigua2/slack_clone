@@ -14,8 +14,8 @@ class App extends React.Component {
 			<React.Fragment>
 				<Switch>
 					<Route exact path="/" component={LogContainer} />
-					<Route exa path="/clone" component={SlackContainer} />
-					<Route exact path="/register" component={Register} />
+					<Route path="/clone" component={SlackContainer} />
+					<Route path="/register" component={Register} />
 					<Route render={() => <h1>Not Found</h1>} />
 				</Switch>
 			</React.Fragment>

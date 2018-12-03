@@ -1,11 +1,13 @@
 import React from 'react';
 import BodyContent from './BodyContent';
-import UsernameForm from './UsernameForm';
+import Signin from './Signin';
+import Navbar from '../navbar/LoginNav';
 
 const LogContainer = () => {
 	return (
 		<React.Fragment>
-			<UsernameForm />
+			<Navbar />
+			<Signin />
 			<BodyContent />
 		</React.Fragment>
 	);
