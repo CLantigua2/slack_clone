@@ -4,10 +4,11 @@ import LogContainer from './components/login/LogContainer';
 import SlackContainer from './components/slackApp/SlackContainer';
 import Register from './components/login/Register';
 import CreateChannel from './components/slackApp/CreateChannel';
-// import SlackSide from './components/slackApp/SlackSide';
+import SlackSide from './components/slackApp/SlackSide';
 import { Route } from 'react-router';
 import { Switch } from 'react-router-dom';
 import { connectStore } from './context/store';
+import My404Page from './components/loading/My404Page';
 
 class App extends React.Component {
 	render() {
@@ -17,11 +18,19 @@ class App extends React.Component {
 				<Switch>
 					<Route exact path="/" component={LogContainer} />
 					<Route path="/register" component={Register} />
-					<Route path="/slackapp" component={SlackContainer} />
-					{/* <Route path="/slackapp" component={SlackSide} /> */}
 					<Route path="/createchannel" component={CreateChannel} />
-					<Route render={() => <h1>Not Found</h1>} />
+					<Route
+						path="/slackapp"
+						render={() => (
+							<React.Fragment>
+								<SlackContainer />
+								<SlackSide />
+							</React.Fragment>
+						)}
+					/>
 				</Switch>
+				<Route component={My404Page} />
+				<Route />
 			</React.Fragment>
 		);
 	}

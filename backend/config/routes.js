@@ -6,11 +6,14 @@ const { authenticate, generateToken } = require('./middleware.js');
 
 // exported routes with their functions
 module.exports = (server) => {
+	// user helpers
 	server.post('/api/register', register);
 	server.post('/api/login', login);
 	server.get('/api/users', authenticate, getUsers);
 	server.get('/api/user/:id', getSingleUser);
+	// channel helpers
 	server.get('/api/channels', getChannels);
+	server.post('/api/createchannel', createChannel);
 };
 
 //////////////////// USER ROUTES ////////////////////////////////
@@ -80,4 +83,14 @@ function getSingleUser(req, res) {
 
 function getChannels(req, res) {
 	db('channels').select('*').then((channel) => res.status(200).json(channel)).catch((err) => res.send(err));
+}
+
+function createChannel(req, res) {
+	const newChannel = req.body;
+	db('channels').insert(newChannel);
+	then((ids) => {
+		res.status(201).json(ids);
+	}).catch((err) => {
+		res.status(500).json({ message: 'Error creating that channel', err });
+	});
 }

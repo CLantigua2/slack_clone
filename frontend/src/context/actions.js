@@ -122,3 +122,24 @@ export function getAllChannels() {
 			console.dir(err);
 		});
 }
+
+export function createChannel() {
+	const { name, purpose } = this.state.newChannel;
+	axios
+		.post(endpoint + 'createchannel', { name, purpose })
+		.then((res) => {
+			if (res.status === 201) {
+				this.setState({
+					newChannel: {
+						name: '',
+						purpose: ''
+					}
+				});
+			} else {
+				throw new Error('its broken');
+			}
+		})
+		.catch((err) => {
+			console.dir(err);
+		});
+}

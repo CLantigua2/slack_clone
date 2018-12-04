@@ -16,6 +16,11 @@ export class Provider extends Component {
 		//login form
 		userLog: '',
 		passLog: '',
+		// creating channel
+		newChannel: {
+			name: '',
+			purpose: ''
+		},
 		loading: false,
 		loggedIn: false,
 		sidebar: false,
