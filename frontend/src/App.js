@@ -28,8 +28,8 @@ class App extends React.Component {
 							</React.Fragment>
 						)}
 					/>
+					<Route component={My404Page} />
 				</Switch>
-				<Route component={My404Page} />
 				<Route />
 			</React.Fragment>
 		);

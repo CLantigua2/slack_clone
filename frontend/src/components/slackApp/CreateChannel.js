@@ -20,7 +20,13 @@ class CreateChannel extends React.Component {
 						Purpose <span>{`(optional)`}</span>
 					</label>
 					<button>Cancel</button> <button>Create Channel</button>
-					<input type="text" name="channel" />
+					<input
+						type="text"
+						name="purpose"
+						value={purpose}
+						placeholder="Add a purpose..."
+						onChange={handleChange}
+					/>
 				</form>
 			</div>
 		);
