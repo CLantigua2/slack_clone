@@ -7,20 +7,20 @@ This app was created as a side project while attending Lambda School. It was mod
 
 1. Allow a user to register an account.
 
-   a. Encrypt the password given through backend hashing. <br>
-   b. Generate a json web token for that account to use.  <br>
-   c. Deny access if the user credentials do not match. <br>
+   a. Encrypt the password given through backend hashing.✔ <br>
+   b. Generate a json web token for that account to use.✔  <br>
+   c. Deny access if the user credentials do not match.✔ <br>
 
 2. Allow a user to sign in
 
-    a. User should be able to sign in using the credentials they registered with. <br>
-    b. Client should authenticate the users token and grant access to restricted areas of the site. <br>
+    a. User should be able to sign in using the credentials they registered with.✔ <br>
+    b. Client should authenticate the users token and grant access to restricted areas of the site.✔ <br>
     c. User should be able to edit their information once they have been granted access to the site.
     d. User should be able to delete their account once signed in.
 
 3. Allow signed in users to view and edit channels & posts
 
-    a. users should be able to view all of the created channels. <br>
+    a. users should be able to view all of the created channels.✔ <br>
     b. users should be able to create new channels.<br>
     c. users should be able click on the channels and view posts from other users tied to those channels.<br>
     d. users should be able to post comments in those channels.<br>
