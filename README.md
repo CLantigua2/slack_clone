@@ -1,17 +1,30 @@
 
 # SlackClone
 
-This app was created as a side project while attending Lambda School. It was modeled after the Slack application and is not meant to be used as a production ready app, simply a demostrational app. This app will include the following features per MVP:
+This app was created as a side project while attending Lambda School. It was modeled after the Slack application and is not meant to be used as a production ready app, simply a demostrational app. This app will include the following features per MVP.
 
-## Features
+## MVP Features
 
 1. Allow a user to register an account.
 
--- a. Encrypt the password given through backend hashing.
--- b. Generate a json web token for that account to use.
--- c. Deny access if the user credentials do not match.
+ -a. Encrypt the password given through backend hashing. <br>
+ -b. Generate a json web token for that account to use.  <br>
+ -c. Deny access if the user credentials do not match. <br>
 
 2. Allow a user to sign in
+
+   -a. User should be able to sign in using the credentials they registered with. <br>
+   -b. Client should authenticate the users token and grant access to restricted areas of the site. <br>
+   -c. User should be able to edit their information once they have been granted access to the site.
+   -d. User should be able to delete their account once signed in.
+
+3. Allow signed in users to view and edit channels & posts
+
+  -a. users should be able to view all of the created channels. <br>
+  -b. users should be able to create new channels.<br>
+  -c. users should be able click on the channels and view posts from other users tied to those channels.<br>
+  d. users should be able to post comments in those channels.<br>
+  e. users should be able to edit those comments or delete them.<br>
 
 ## Available Scripts
 
@@ -19,10 +32,9 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.<br>
-Concurrently runs [http://localhost:9000](http://localhost:9000) <br>
-using nodemon to watch for changes to the backend NodeJS server and [http://localhost:3000](http://localhost:3000)<br>
-for the frontend React app.
+Runs the app in the development mode.
+Concurrently runs [http://localhost:9000](http://localhost:9000)
+using nodemon to watch for changes to the backend NodeJS server and [http://localhost:3000](http://localhost:3000) for the frontend React app.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console. <br>
