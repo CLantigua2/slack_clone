@@ -5,14 +5,13 @@ import { connectStore } from '../../context/store';
 class NavBar extends React.Component {
 	render() {
 		const { channel } = this.props;
-		console.log(channel);
 		return (
 			<StyledContainer>
 				{channel.length !== 0 ? (
 					channel.map((chan) => {
 						return (
 							<div key={chan.id}>
-								<h3>{chan.channel}</h3>
+								<h3>#{chan.channel}</h3>
 							</div>
 						);
 					})

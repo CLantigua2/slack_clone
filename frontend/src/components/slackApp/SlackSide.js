@@ -42,7 +42,8 @@ class SlackSide extends React.Component {
 						<Link to="/createchannel">&#43;</Link>
 					</StyledNewChannel>
 				</StyledAddChannelDiv>
-				{this.props.channels.map((channel) => {
+				{this.props.channels.map((channel, idx) => {
+					console.log(idx);
 					return (
 						<div key={channel.id}>
 							<StyledH4>

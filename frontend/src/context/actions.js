@@ -107,6 +107,7 @@ export function registerUser(e) {
 ///////////////// channel actions ///////////////////
 
 export function getAllChannels() {
+	// get a list of all the channels
 	axios
 		.get(endpoint + 'channels')
 		.then((res) => {
@@ -124,6 +125,7 @@ export function getAllChannels() {
 }
 
 export function createChannel(e) {
+	// create a single channel
 	e.preventDefault();
 	const { newChannelName, newChannelPurpose } = this.state;
 
@@ -132,7 +134,7 @@ export function createChannel(e) {
 	} else {
 		axios
 			.post(endpoint + 'createchannel', {
-				channel: newChannelName,
+				channel: newChannelName.replace(/ /g, '_').toLowerCase(),
 				purpose: newChannelPurpose
 			})
 			.then((res) => {
@@ -162,6 +164,7 @@ export function createChannel(e) {
 }
 
 export function getAChannel(channel) {
+	// get a single channel
 	axios
 		.get(`${endpoint}channels/${channel}`)
 		.then((res) => {

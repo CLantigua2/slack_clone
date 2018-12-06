@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as actions from './actions';
-import axios from 'axios';
 
 const Context = React.createContext();
 
@@ -38,6 +37,7 @@ export class Provider extends Component {
 	};
 
 	render() {
+		console.log(this.state);
 		return (
 			<Context.Provider
 				value={{

@@ -92,7 +92,9 @@ function getChannels(req, res) {
 }
 
 function getAChannel(req, res) {
+	const { channel } = req.params;
 	db('channels')
+		.where({ channel: channel })
 		.select('id', 'channel', 'purpose')
 		.then((channel) => {
 			res.json(channel);
