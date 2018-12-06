@@ -123,25 +123,37 @@ export function getAllChannels() {
 		});
 }
 
-export function createChannel() {
-	const { name, purpose } = this.state.newChannel;
-	axios
-		.post(endpoint + 'createchannel', { name, purpose })
-		.then((res) => {
-			if (res.status === 201) {
+export function createChannel(e) {
+	e.preventDefault();
+	const { newChannelName, newChannelPurpose } = this.state;
+
+	if (!newChannelName) {
+		alert('Please fill out channel name');
+	} else {
+		axios
+			.post(endpoint + 'createchannel', {
+				channel: newChannelName,
+				purpose: newChannelPurpose
+			})
+			.then((res) => {
+				if (res.status === 201) {
+					this.setState({
+						newChannelName: '',
+						newChannelPurpose: '',
+						creating: true
+					});
+				} else {
+					throw new Error('its broken');
+				}
+			})
+			.catch((err) => {
 				this.setState({
-					newChannel: {
-						name: '',
-						purpose: ''
-					}
+					state: { ...this.state }
 				});
-			} else {
-				throw new Error('its broken');
-			}
-		})
-		.catch((err) => {
-			console.dir(err);
-		});
+				console.dir(err);
+			});
+	}
+	e.target.reset();
 }
 
 export function getAChannel(channel) {

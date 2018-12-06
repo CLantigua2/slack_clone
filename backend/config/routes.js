@@ -83,7 +83,12 @@ function getSingleUser(req, res) {
 /////////////////// Channel & Comment routes ///////////////////////
 
 function getChannels(req, res) {
-	db('channels').select('*').then((channel) => res.status(200).json(channel)).catch((err) => res.send(err));
+	db('channels')
+		.select('*')
+		.then((channel) => {
+			res.status(200).json(channel);
+		})
+		.catch((err) => res.send(err));
 }
 
 function getAChannel(req, res) {
@@ -99,10 +104,12 @@ function getAChannel(req, res) {
 
 function createChannel(req, res) {
 	const newChannel = req.body;
-	db('channels').insert(newChannel);
-	then((ids) => {
-		res.status(201).json(ids);
-	}).catch((err) => {
-		res.status(500).json({ message: 'Error creating that channel', err });
-	});
+	db('channels')
+		.insert(newChannel)
+		.then((ids) => {
+			res.status(201).json(ids);
+		})
+		.catch((err) => {
+			res.status(500).json({ message: 'Error creating that channel', err });
+		});
 }
