@@ -146,6 +146,11 @@ export function createChannel(e) {
 					throw new Error('its broken');
 				}
 			})
+			.then(() => {
+				this.setState({
+					creating: false
+				});
+			})
 			.catch((err) => {
 				this.setState({
 					state: { ...this.state }
