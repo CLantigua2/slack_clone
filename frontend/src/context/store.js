@@ -23,9 +23,10 @@ export class Provider extends Component {
 		},
 		loading: false,
 		loggedIn: false,
-		sidebar: false,
 		userStuff: [],
 		channels: [],
+		// single channel
+		channel: [],
 		allUsers: [],
 		postInfo: []
 	};

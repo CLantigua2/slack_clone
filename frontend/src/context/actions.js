@@ -143,3 +143,14 @@ export function createChannel() {
 			console.dir(err);
 		});
 }
+
+export function getAChannel(channel) {
+	axios
+		.get(`${endpoint}channels/${channel}`)
+		.then((res) => {
+			this.setState({ channel: res.data });
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}

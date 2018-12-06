@@ -14,6 +14,7 @@ module.exports = (server) => {
 	// channel helpers
 	server.get('/api/channels', getChannels);
 	server.post('/api/createchannel', createChannel);
+	server.get('/api/channels/:channel', getAChannel);
 };
 
 //////////////////// USER ROUTES ////////////////////////////////
@@ -83,6 +84,17 @@ function getSingleUser(req, res) {
 
 function getChannels(req, res) {
 	db('channels').select('*').then((channel) => res.status(200).json(channel)).catch((err) => res.send(err));
+}
+
+function getAChannel(req, res) {
+	db('channels')
+		.select('id', 'channel', 'purpose')
+		.then((channel) => {
+			res.json(channel);
+		})
+		.catch((err) => {
+			res.status(500).json({ message: 'Error retrieving that channel', err });
+		});
 }
 
 function createChannel(req, res) {

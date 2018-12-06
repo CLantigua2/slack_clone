@@ -2,18 +2,27 @@ import React from 'react';
 import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 
-const ChatBody = () => {
-	return (
-		<StyledContainer>
-			<h1>chat box here!</h1>
-			<p>
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor quidem corrupti ipsa? Fugit doloribus,
-				voluptatum fugiat saepe, molestiae velit accusantium, nihil quos dignissimos impedit qui earum veniam
-				expedita provident sunt.
-			</p>
-		</StyledContainer>
-	);
-};
+class ChatBody extends React.Component {
+	render() {
+		const { channel } = this.props;
+		if (channel.length === 0) {
+			return (
+				<div>
+					<h1>Click a channel from the side menu please.</h1>
+				</div>
+			);
+		} else {
+			return channel.map((chan) => {
+				return (
+					<StyledContainer key={chan.id}>
+						<h1>{chan.channel}</h1>
+						<p>{chan.purpose}</p>
+					</StyledContainer>
+				);
+			});
+		}
+	}
+}
 
 export default connectStore(ChatBody);
 

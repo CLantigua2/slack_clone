@@ -8,6 +8,7 @@ class SlackSide extends React.Component {
 		this.props.getAllChannels();
 	}
 	render() {
+		const { getAChannel } = this.props;
 		return (
 			<StyledContainer>
 				<div>
@@ -45,7 +46,9 @@ class SlackSide extends React.Component {
 					return (
 						<div key={channel.id}>
 							<StyledH4>
-								<Link to={`/slackapp/${channel.channel}`}># {channel.channel}</Link>
+								<Link to={`/slackapp/${channel.channel}`} onClick={() => getAChannel(channel.channel)}>
+									# {channel.channel}
+								</Link>
 							</StyledH4>
 						</div>
 					);
