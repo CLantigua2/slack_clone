@@ -15,7 +15,6 @@ class ChatBody extends React.Component {
 			return channel.map((chan) => {
 				return (
 					<StyledContainer key={chan.id}>
-						<h1>{chan.channel}</h1>
 						<p>{chan.purpose}</p>
 					</StyledContainer>
 				);

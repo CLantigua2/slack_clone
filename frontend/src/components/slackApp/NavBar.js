@@ -1,26 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connectStore } from '../../context/store';
 
-const NavBar = () => {
-	return (
-		<StyledContainer>
-			<div>
-				<h3># Channel Name</h3>
-			</div>
-			<StyledIconCont>
-				<i className="fas fa-phone" />
-				<i className="fas fa-info-circle" />
-				<i className="fas fa-cog" />
-				<StyledInput type="text" placeholder="🍳 Search..." />
-				<i className="fas fa-at" />
-				<i className="far fa-star" />
-				<i className="fas fa-ellipsis-v" />
-			</StyledIconCont>
-		</StyledContainer>
-	);
-};
+class NavBar extends React.Component {
+	render() {
+		const { channel } = this.props;
+		console.log(channel);
+		return (
+			<StyledContainer>
+				{channel.length !== 0 ? (
+					channel.map((chan) => {
+						return (
+							<div key={chan.id}>
+								<h3>{chan.channel}</h3>
+							</div>
+						);
+					})
+				) : (
+					<div>
+						<h3>Select a channel</h3>
+					</div>
+				)}
+				<StyledIconCont>
+					<i className="fas fa-phone" />
+					<i className="fas fa-info-circle" />
+					<i className="fas fa-cog" />
+					<StyledInput type="text" placeholder="🍳 Search..." />
+					<i className="fas fa-at" />
+					<i className="far fa-star" />
+					<i className="fas fa-ellipsis-v" />
+				</StyledIconCont>
+			</StyledContainer>
+		);
+	}
+}
 
-export default NavBar;
+export default connectStore(NavBar);
 
 const StyledContainer = styled.div`
 	display: flex;
@@ -30,7 +45,7 @@ const StyledContainer = styled.div`
 	background: #fff;
 	padding: 5px;
 	width: 100%;
-	height: 100%;
+	height: 50px;
 	box-sizing: border-box;
 	line-height: 1rem;
 	font-size: 16px;
