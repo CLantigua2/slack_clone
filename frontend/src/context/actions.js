@@ -1,6 +1,4 @@
 import axios from 'axios';
-import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 const endpoint = 'http://localhost:9000/api/';
 
@@ -56,14 +54,13 @@ export function signIn(e) {
 
 // get all users into state
 export function getAllUsers() {
-	const endpoint = 'http://localhost:9000/api/';
 	// gets a list of all the users in the server
 	axios
 		.get(`${endpoint}users`)
 		.then((res) => {
-			const { token } = res.data;
-			if (token) {
-				this.setState({ allUsers: res.data });
+			if (res.data.token) {
+				localStorage.getItem('jwt', res.data.token);
+				this.setState({ allUsers: res.data, userStuff: res.data.token.username });
 			} else {
 				return null;
 			}
@@ -71,6 +68,7 @@ export function getAllUsers() {
 		.catch((err) => {
 			console.log(err);
 		});
+	console.log(this.state.userStuff);
 }
 
 // sends user register name and email to server

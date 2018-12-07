@@ -16,9 +16,9 @@ class NavBar extends React.Component {
 						);
 					})
 				) : (
-					<div>
+					<StyledContainer>
 						<h3>Select a channel</h3>
-					</div>
+					</StyledContainer>
 				)}
 				<StyledIconCont>
 					<i className="fas fa-phone" />
@@ -37,6 +37,7 @@ class NavBar extends React.Component {
 export default connectStore(NavBar);
 
 const StyledContainer = styled.div`
+	font-family: 'Montserrat', sans-serif;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

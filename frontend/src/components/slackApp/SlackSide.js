@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 class SlackSide extends React.Component {
 	componentDidMount() {
 		this.props.getAllChannels();
+		this.props.getAllUsers();
 	}
 	render() {
 		const { getAChannel } = this.props;
@@ -43,7 +44,6 @@ class SlackSide extends React.Component {
 					</StyledNewChannel>
 				</StyledAddChannelDiv>
 				{this.props.channels.map((channel, idx) => {
-					console.log(idx);
 					return (
 						<div key={channel.id}>
 							<StyledH4>
@@ -66,7 +66,7 @@ const StyledNewChannel = styled.button`
 	background: transparent;
 	border: 1px solid #2abec7;
 	border-radius: 50%;
-	margin-left: 87px;
+	margin-left: 80px;
 	a {
 		text-decoration: none;
 		color: #2abec7;
@@ -85,11 +85,12 @@ const StyledAddChannelDiv = styled.div`
 const StyledH3 = styled.h3`
 	color: #2abec7;
 	margin: 0;
+	margin-bottom: 10px;
 	padding: 0;
 `;
 const StyledH4 = styled.h4`
 	color: #2abec7;
-	margin: 0;
+	margin: 5px;
 	padding: 0;
 	a {
 		text-decoration: none;
@@ -98,6 +99,7 @@ const StyledH4 = styled.h4`
 `;
 
 const StyledContainer = styled.div`
+	font-family: 'Montserrat', sans-serif;
 	overflow-y: scroll;
 	background: #ffffff;
 	display: flex;

@@ -1,18 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connectStore } from '../../context/store';
 
-const Comment = () => {
-	return (
-		<StyledFooter>
-			<StyledForm action="submit">
-				<StyledButton>+</StyledButton>
-				<StyledInput type="text" placeholder="#channel name" />
-			</StyledForm>
-		</StyledFooter>
-	);
-};
+class Comment extends React.Component {
+	render() {
+		const { channel } = this.props;
+		if (channel.length === 0) {
+			return null;
+		} else {
+			return (
+				<StyledFooter>
+					<StyledForm action="submit">
+						<StyledButton>+</StyledButton>
+						<StyledInput type="text" placeholder="#channel name" />
+					</StyledForm>
+				</StyledFooter>
+			);
+		}
+	}
+}
 
-export default Comment;
+export default connectStore(Comment);
 
 const StyledFooter = styled.div`
 	/* position: absolute;

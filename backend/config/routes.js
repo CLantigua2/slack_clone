@@ -47,7 +47,7 @@ function login(req, res) {
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
 				// give the user a token to be used for access in cookie
 				const token = generateToken(user);
-				res.status(200).json({ message: 'Welcome!', token });
+				res.status(200).json({ message: `Welcome ${user.username}` });
 			} else {
 				res.status(401).json({ message: 'you shall not pass!!' });
 			}

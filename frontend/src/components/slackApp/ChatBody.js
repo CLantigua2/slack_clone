@@ -15,7 +15,7 @@ class ChatBody extends React.Component {
 			return channel.map((chan) => {
 				return (
 					<StyledContainer key={chan.id}>
-						<p>{chan.purpose}</p>
+						<StyledPTag>{chan.purpose}</StyledPTag>
 					</StyledContainer>
 				);
 			});
@@ -25,8 +25,14 @@ class ChatBody extends React.Component {
 
 export default connectStore(ChatBody);
 
-export const StyledContainer = styled.div`
-	min-height: 87vh;
+const StyledPTag = styled.p`
+	margin: 0;
+	font-size: 12px;
+`;
+
+const StyledContainer = styled.div`
+	font-family: 'Montserrat', sans-serif;
+	min-height: 90vh;
 	max-height: 500px;
 	overflow-y: auto;
 `;
