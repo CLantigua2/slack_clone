@@ -21,7 +21,7 @@ This app was created as a side project while attending Lambda School. It was mod
 3. Allow signed in users to view and edit channels & posts
 
     a. users should be able to view all of the created channels. ✔<br>
-    b. users should be able to create new channels.<br>
+    b. users should be able to create new channels. ✔<br>
     c. users should be able click on the channels and view posts from other users tied to those channels.<br>
     d. users should be able to post comments in those channels.<br>
     e. users should be able to edit those comments or delete them.<br>

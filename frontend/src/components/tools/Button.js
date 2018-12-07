@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Button = (props) => {
 	return (
-		<StyledButton>
+		<StyledButton success={props.success}>
 			<span>{props.children}</span>
 		</StyledButton>
 	);
@@ -14,7 +14,7 @@ export default Button;
 export const StyledButton = styled.button`
 	display: inline-block;
 	border-radius: 4px;
-	background-color: #3f46ad;
+	background-color: ${(props) => (props.success ? 'rgb(28,184,65)' : 'rgb(202, 60, 60)')};
 	font-weight: bold;
 	border: none;
 	color: #ffffff;
