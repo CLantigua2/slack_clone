@@ -69,7 +69,7 @@ export function signIn(e) {
 				const { username, firstname, lastname, id } = res.data;
 				if (res.status === 200 && res.data) {
 					localStorage.setItem('jwt', res.data);
-
+					// keeps loggedin users info in state
 					this.setState({
 						userStuff: {
 							username,
@@ -79,11 +79,13 @@ export function signIn(e) {
 						}
 					});
 				} else {
+					// don't allow access
 					this.setState({ loggedIn: false });
 					throw new Error();
 				}
 			})
 			.then((res) => {
+				// blanks out the origin login fields
 				this.setState({ userLog: '', passLog: '', loggedIn: true });
 			})
 			.catch((err) => {
