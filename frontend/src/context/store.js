@@ -37,7 +37,7 @@ export class Provider extends Component {
 	};
 
 	render() {
-		// console.log(this.state);
+		console.log(this.state.userStuff);
 		return (
 			<Context.Provider
 				value={{

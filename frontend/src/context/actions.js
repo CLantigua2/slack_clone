@@ -4,6 +4,29 @@ const endpoint = 'http://localhost:9000/api/';
 
 //////////////////////// User actions //////////////////////////
 
+export function authenticate() {
+	const token = localStorage.getItem('jwt');
+	const options = {
+		headers: {
+			Authorization: token
+		}
+	};
+	if (token) {
+		axios
+			.get(`${endpoint}users`, options)
+			.then((res) => {
+				if (res.status === 200 && res.data) {
+					this.setState({ loggedIn: true, userStuff: res.data });
+				} else {
+					throw new Error();
+				}
+			})
+			.catch((err) => {
+				console.dir(err);
+			});
+	}
+}
+
 // gets a list of all the users in the server
 export function getAllUserInfo() {
 	axios
@@ -43,7 +66,24 @@ export function signIn(e) {
 		axios
 			.post(endpoint + 'login', { username: userLog, password: passLog })
 			.then((res) => {
-				!res.data.token ? this.setState({ loading: true }) : localStorage.setItem('jwt', res.data.token);
+				const { username, firstname, lastname, id } = res.data;
+				if (res.status === 200 && res.data) {
+					localStorage.setItem('jwt', res.data);
+
+					this.setState({
+						userStuff: {
+							username,
+							firstname,
+							lastname,
+							id
+						}
+					});
+				} else {
+					this.setState({ loggedIn: false });
+					throw new Error();
+				}
+			})
+			.then((res) => {
 				this.setState({ userLog: '', passLog: '', loggedIn: true });
 			})
 			.catch((err) => {
@@ -104,10 +144,16 @@ export function registerUser(e) {
 	e.target.reset();
 }
 
+export function signOut() {
+	localStorage.removeItem('jwt');
+	this.setState({ loggedIn: false });
+}
+
 ///////////////// channel actions ///////////////////
 
 export function getAllChannels() {
 	// get a list of all the channels
+	authenticate();
 	axios
 		.get(endpoint + 'channels')
 		.then((res) => {

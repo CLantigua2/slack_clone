@@ -9,8 +9,8 @@ module.exports = (server) => {
 	// user helpers
 	server.post('/api/register', register);
 	server.post('/api/login', login);
-	server.get('/api/users', authenticate, getUsers);
-	server.get('/api/user/:id', getSingleUser);
+	server.get('/api/users', getUsers);
+	server.get('/api/user/:username', getSingleUser);
 	// channel helpers
 	server.get('/api/channels', getChannels);
 	server.post('/api/createchannel', createChannel);
@@ -47,8 +47,9 @@ function login(req, res) {
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
 				// give the user a token to be used for access in cookie
 				const token = generateToken(user);
-				res.status(200).json({ message: `Welcome ${user.username}` });
+				res.status(200).json({ ...user, token });
 			} else {
+				this.props.history.push('/');
 				res.status(401).json({ message: 'you shall not pass!!' });
 			}
 		})
@@ -72,7 +73,8 @@ function getSingleUser(req, res) {
 	db('users')
 		.select('id', 'username', 'firstname', 'lastname')
 		.where({ username: creds.username })
-		.first((user) => {
+		.first()
+		.then((user) => {
 			res.status(200).json(user);
 		})
 		.catch((err) => {

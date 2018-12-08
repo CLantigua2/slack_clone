@@ -1,20 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connectStore } from '../../context/store';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 class SlackSide extends React.Component {
-	componentDidMount() {
-		this.props.getAllChannels();
-		this.props.getAllUsers();
-	}
 	render() {
-		const { getAChannel } = this.props;
+		const { getAChannel, userStuff } = this.props;
 		return (
 			<StyledContainer>
 				<div>
 					<StyledHeader>Lambda School..</StyledHeader>
-					<StyledPTag>Carlos</StyledPTag>
+					<StyledPTag>{userStuff.username}</StyledPTag>
 				</div>
 				<div>
 					<form action="button">
@@ -45,13 +41,20 @@ class SlackSide extends React.Component {
 				</StyledAddChannelDiv>
 				{this.props.channels.map((channel, idx) => {
 					return (
-						<div key={channel.id}>
+						<StyledMapDiv key={channel.id}>
 							<StyledH4>
-								<Link to={`/slackapp/${channel.channel}`} onClick={() => getAChannel(channel.channel)}>
-									# {channel.channel}
-								</Link>
+								<SyledNavLink
+									className={channel.channel ? 'navLink' : null}
+									activeClassName={channel.channel ? 'current' : null}
+									strict
+									to={`/slackapp/${channel.channel}`}
+									onClick={() => getAChannel(channel.channel)}
+								>
+									<span>#</span>
+									{channel.channel}
+								</SyledNavLink>
 							</StyledH4>
-						</div>
+						</StyledMapDiv>
 					);
 				})}
 			</StyledContainer>
@@ -61,16 +64,37 @@ class SlackSide extends React.Component {
 
 export default connectStore(SlackSide);
 
+const SyledNavLink = styled(NavLink)`
+	color: #275d5f;
+	span {
+		margin-right: 5px;
+	}
+	&.current {
+		color: #2abec7;
+		font-weight: 700;
+	}
+`;
+
+const StyledMapDiv = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 80%;
+`;
+
 const StyledNewChannel = styled.button`
 	color: #2abec7;
 	background: transparent;
 	border: 1px solid #2abec7;
 	border-radius: 50%;
 	margin-left: 80px;
+	display: flex;
+	flex-direction: row;
 	a {
-		text-decoration: none;
 		color: #2abec7;
-		font-weight: bold;
+		text-decoration: none;
 	}
 `;
 
@@ -89,16 +113,19 @@ const StyledH3 = styled.h3`
 	padding: 0;
 `;
 const StyledH4 = styled.h4`
-	color: #2abec7;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #275d5f;
 	margin: 5px;
 	padding: 0;
 	a {
 		text-decoration: none;
-		color: #2abec7;
 	}
 `;
 
 const StyledContainer = styled.div`
+	overflow: hidden;
+	text-overflow: ellipsis;
 	font-family: 'Montserrat', sans-serif;
 	overflow-y: scroll;
 	background: #ffffff;
