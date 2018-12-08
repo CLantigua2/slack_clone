@@ -15,6 +15,9 @@ module.exports = (server) => {
 	server.get('/api/channels', getChannels);
 	server.post('/api/createchannel', createChannel);
 	server.get('/api/channels/:channel', getAChannel);
+	// post helpers
+	server.post('/api/makepost', makePost);
+	server.get('/api/posts', getPosts);
 };
 
 //////////////////// USER ROUTES ////////////////////////////////
@@ -115,5 +118,31 @@ function createChannel(req, res) {
 		})
 		.catch((err) => {
 			res.status(500).json({ message: 'Error creating that channel', err });
+		});
+}
+
+////////////// Post functions //////////////
+// create a new post
+function makePost(req, res) {
+	const newPost = req.body;
+	db('posts')
+		.insert(newPost)
+		.then((ids) => {
+			res.status(201).json(ids);
+		})
+		.catch((err) => {
+			res.status(500).json({ message: 'Error creating that post', err });
+		});
+}
+
+function getPosts(req, res) {
+	db('posts')
+		.where({ post: post })
+		.select('id', 'post', 'created_at')
+		.then((posts) => {
+			res.status(200).json(posts);
+		})
+		.catch((err) => {
+			res.status(404).json({ message: 'Error retrieving posts' }, err);
 		});
 }

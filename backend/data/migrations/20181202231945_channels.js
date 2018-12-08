@@ -1,8 +1,9 @@
 exports.up = function(knex, Promise) {
-	return knex.schema.createTable('channels', (channel) => {
-		channel.increments();
-		channel.string('channel', 22).notNullable().unique();
-		channel.text('purpose').nullable();
+	return knex.schema.createTable('channels', (tbl) => {
+		tbl.increments();
+		tbl.integer('user_id').unsigned().references('id').inTable('users');
+		tbl.string('channel', 22).notNullable().unique();
+		tbl.text('purpose').nullable();
 	});
 };
 
