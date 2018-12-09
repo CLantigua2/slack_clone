@@ -21,7 +21,7 @@ export class Provider extends Component {
 		creating: false,
 		loading: false,
 		loggedIn: false,
-		incorrect: false,
+		incorrect: 0,
 		userStuff: [],
 		channels: [],
 		// single channel

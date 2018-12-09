@@ -62,7 +62,7 @@ export function signIn(e) {
 	this.setState({ loading: true });
 	const { userLog, passLog } = this.state;
 	if (userLog === '' || passLog === '') {
-		this.setState({ loading: false, incorrect: 'Please provide a username and password' });
+		this.setState({ loading: false, incorrect: 1 });
 	} else {
 		axios
 			.post(endpoint + 'login', { username: userLog, password: passLog })
@@ -90,7 +90,7 @@ export function signIn(e) {
 				this.setState({ userLog: '', passLog: '', loggedIn: true, loading: false });
 			})
 			.catch((err) => {
-				this.setState({ loading: false, incorrect: 'Incorrect username or password' });
+				this.setState({ loading: false, incorrect: 2 });
 				console.dir('ERROR', err);
 			});
 	}
@@ -121,8 +121,7 @@ export function registerUser(e) {
 	this.setState({ loading: true });
 	const { username, password, firstname, lastname } = this.state;
 	if (!username || !password || !firstname || !lastname) {
-		alert('Please enter all of your information');
-		this.setState({ loading: false });
+		this.setState({ loading: false, incorrect: 3 });
 	} else {
 		axios
 			.post(`${endpoint}register`, { username, password, firstname, lastname })
@@ -148,7 +147,8 @@ export function registerUser(e) {
 					firstname: '',
 					lastname: '',
 					loggedIn: true,
-					loading: false
+					loading: false,
+					incorrect: ''
 				});
 			})
 			.catch((err) => {

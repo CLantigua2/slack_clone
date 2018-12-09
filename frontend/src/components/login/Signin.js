@@ -6,13 +6,17 @@ import { Link, Redirect } from 'react-router-dom';
 import Button from '../tools/Button';
 import Spinner from '../loading/spinner';
 
+export const message = {
+	bothFields: 'Please provide a username and password',
+	badCreds: 'Incorrect login information'
+};
 // home page form
 class Signin extends React.Component {
 	// handls user sign in from the front page
 
 	render() {
 		// all of this is coming from the context store
-		const { handleChange, userLog, passLog, signIn, loggedIn, loading } = this.props;
+		const { handleChange, userLog, passLog, signIn, loggedIn, loading, incorrect } = this.props;
 		if (loggedIn) {
 			return <Redirect to="/slackapp" />;
 		}
@@ -35,6 +39,7 @@ class Signin extends React.Component {
 						// handles form value changes
 						onChange={handleChange}
 					/>
+
 					<StyledInput
 						type="password"
 						name="passLog"
@@ -50,6 +55,15 @@ class Signin extends React.Component {
 							<span>Register</span>
 						</StyledRegister>
 					</div>
+					<div>
+						<StyledP>
+							{incorrect === 1 ? (
+								message.bothFields
+							) : incorrect === 2 ? (
+								message.badCreds
+							) : incorrect === 0 ? null : null}
+						</StyledP>
+					</div>
 				</StyledForm>
 			</StyledContainer>
 		);
@@ -58,6 +72,11 @@ class Signin extends React.Component {
 
 // connect context store to this component using HOC
 export default connectStore(Signin);
+
+const StyledP = styled.p`
+	color: red;
+	margin-left: 40px;
+`;
 
 export const StyledContainer = styled.div`
 	display: flex;

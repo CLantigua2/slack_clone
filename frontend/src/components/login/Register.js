@@ -4,10 +4,13 @@ import logo from '../navbar/SlackLogo.PNG';
 import { connectStore } from '../../context/store';
 import { Redirect, Link } from 'react-router-dom';
 
+export const message = {
+	fillOutAll: 'Please fill out all required fields'
+};
 // this is the sidebar component for the main login page
 class Register extends React.Component {
 	render() {
-		const { username, password, handleChange, registerUser, firstname, lastname, loggedIn } = this.props;
+		const { username, password, handleChange, registerUser, firstname, lastname, loggedIn, incorrect } = this.props;
 		if (loggedIn === false) {
 			return (
 				<StyledSideBar>
@@ -60,6 +63,7 @@ class Register extends React.Component {
 							</StyledButton>
 						</StryledForm>
 					</div>
+					<StyledP>{incorrect === 3 ? message.fillOutAll : null}</StyledP>
 				</StyledSideBar>
 			);
 		} else {
@@ -70,6 +74,11 @@ class Register extends React.Component {
 
 // connects this component to the context store
 export default connectStore(Register);
+
+const StyledP = styled.p`
+	color: red;
+	margin-left: 40px;
+`;
 
 export const StyledSideBar = styled.div`
 	width: 600px;
