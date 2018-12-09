@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import logo from '../navbar/SlackLogo.PNG';
 import { connectStore } from '../../context/store';
 import { Redirect, Link } from 'react-router-dom';
+import Spinner from '../loading/spinner';
 
 export const message = {
 	fillOutAll: 'Please fill out all required fields'
@@ -10,7 +11,17 @@ export const message = {
 // this is the sidebar component for the main login page
 class Register extends React.Component {
 	render() {
-		const { username, password, handleChange, registerUser, firstname, lastname, loggedIn, incorrect } = this.props;
+		const {
+			username,
+			password,
+			handleChange,
+			registerUser,
+			firstname,
+			lastname,
+			loggedIn,
+			incorrect,
+			loading
+		} = this.props;
 		if (loggedIn === false) {
 			return (
 				<StyledSideBar>
@@ -59,7 +70,7 @@ class Register extends React.Component {
 								onChange={handleChange}
 							/>
 							<StyledButton type="submit">
-								<span>Register</span>
+								<span>{loading === false ? 'Register' : <Spinner />}</span>
 							</StyledButton>
 						</StryledForm>
 					</div>

@@ -153,7 +153,13 @@ export function registerUser(e) {
 			})
 			.catch((err) => {
 				this.setState({
-					state: { ...this.state }
+					username: '',
+					password: '',
+					firstname: '',
+					lastname: '',
+					loggedIn: false,
+					loading: false,
+					incorrect: ''
 				});
 				console.dir(err);
 			});
