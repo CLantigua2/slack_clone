@@ -25,7 +25,7 @@ export default connectStore(Comment);
 const StyledFooter = styled.div`
 	/* position: absolute;
 	bottom: 0; */
-	width: 100%;
+	width: 95%;
 	/* left: 0; */
 	box-sizing: border-box;
 	line-height: 1rem;

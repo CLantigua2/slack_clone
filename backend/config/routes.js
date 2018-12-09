@@ -112,14 +112,18 @@ function getAChannel(req, res) {
 
 function createChannel(req, res) {
 	const newChannel = req.body;
-	db('channels')
-		.insert(newChannel)
-		.then((ids) => {
-			res.status(201).json(ids);
-		})
-		.catch((err) => {
-			res.status(500).json({ message: 'Error creating that channel', err });
-		});
+	if (newChannel.channel.length > 22) {
+		res.status(500).json({ message: 'too many characters in channel name' });
+	} else {
+		db('channels')
+			.insert(newChannel)
+			.then((ids) => {
+				res.status(201).json(ids);
+			})
+			.catch((err) => {
+				res.status(500).json({ message: 'Error creating that channel', err });
+			});
+	}
 }
 
 ////////////// Post functions //////////////

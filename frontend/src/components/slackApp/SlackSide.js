@@ -22,17 +22,7 @@ class SlackSide extends React.Component {
 						</StyledButtonCont>
 					</form>
 				</div>
-				<StyledButtonCont>
-					<StyledToolDiv>
-						<StyledIcon className="fas fa-stream" />
-						<StyledTools>All Unreads</StyledTools>
-					</StyledToolDiv>
 
-					<StyledToolDiv>
-						<StyledIcon className="far fa-comment-dots" />
-						<StyledTools>All Threads</StyledTools>
-					</StyledToolDiv>
-				</StyledButtonCont>
 				<StyledAddChannelDiv>
 					<StyledH3>Channels</StyledH3>
 					<StyledNewChannel>

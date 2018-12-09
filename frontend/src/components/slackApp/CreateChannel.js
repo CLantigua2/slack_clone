@@ -4,9 +4,12 @@ import { connectStore } from '../../context/store';
 import styled from 'styled-components';
 import Button from '../tools/Button';
 
+export const style = {
+	color: 'red'
+};
 class CreateChannel extends React.Component {
 	render() {
-		const { createChannel, handleChange, newChannelName, newChannelPurpose, creating, RedirectIt } = this.props;
+		const { createChannel, handleChange, newChannelName, newChannelPurpose, creating } = this.props;
 		if (creating === false) {
 			return (
 				<StyledContainer>
@@ -23,7 +26,14 @@ class CreateChannel extends React.Component {
 							placeholder="Channel name..."
 							onChange={handleChange}
 						/>
-						<StyledPTags>Channel names will be lower cased and have no spaces.</StyledPTags>
+						<StyledPTags>
+							{newChannelName.length <= 22 ? (
+								<span>22 characters max</span>
+							) : (
+								<StyledSpan>22 characters max</StyledSpan>
+							)}{' '}
+							So far you have used {newChannelName.length} characters.
+						</StyledPTags>
 
 						<StyledInput
 							type="tex"
@@ -60,6 +70,8 @@ const StyledPTags = styled.p`
 	font-style: italic;
 	color: #757575;
 `;
+
+const StyledSpan = styled.span`color: red;`;
 
 const StyledButtonDiv = styled.div`
 	margin: 0 auto;

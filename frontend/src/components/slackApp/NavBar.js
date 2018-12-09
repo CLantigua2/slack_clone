@@ -21,12 +21,8 @@ class NavBar extends React.Component {
 					</StyledContainer>
 				)}
 				<StyledIconCont>
-					<i className="fas fa-phone" />
-					<i className="fas fa-info-circle" />
-					<i className="fas fa-cog" />
 					<input type="text" placeholder="🍳 Search..." />
-					<i className="fas fa-at" />
-					<i className="far fa-star" />
+
 					<i className="fas fa-ellipsis-v" />
 				</StyledIconCont>
 			</StyledContainer>
