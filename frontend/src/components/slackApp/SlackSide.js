@@ -150,12 +150,17 @@ const StyledHeader = styled.h3`
 `;
 
 const StyledPTag = styled.p`
-	color: #2abec7;
+	color: #275d5f;
 	margin: 0;
 	padding: 0;
 	display: list-item;
 	list-style-type: disc;
 	list-style-position: inside;
+	cursor: pointer;
+	transition: 0.4s ease-in-out;
+	&:hover {
+		color: #2abec7;
+	}
 `;
 
 const StyledButton = styled.button`

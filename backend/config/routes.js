@@ -18,6 +18,7 @@ module.exports = (server) => {
 	// post helpers
 	server.post('/api/makepost', makePost);
 	server.get('/api/posts', getPosts);
+	server.get('/api/post/:id', getPost);
 };
 
 //////////////////// USER ROUTES ////////////////////////////////
@@ -128,7 +129,7 @@ function makePost(req, res) {
 	db('posts')
 		.insert(newPost)
 		.then((ids) => {
-			res.status(201).json(ids);
+			res.status(201).json({ id: ids[0] });
 		})
 		.catch((err) => {
 			res.status(500).json({ message: 'Error creating that post', err });
@@ -137,12 +138,24 @@ function makePost(req, res) {
 
 function getPosts(req, res) {
 	db('posts')
-		.where({ post: post })
 		.select('id', 'post', 'created_at')
 		.then((posts) => {
 			res.status(200).json(posts);
 		})
 		.catch((err) => {
 			res.status(404).json({ message: 'Error retrieving posts' }, err);
+		});
+}
+
+function getPost(req, res) {
+	const { id } = req.params;
+	db('posts')
+		.where({ id })
+		.select('id', 'post', 'created_at')
+		.then((post) => {
+			res.status(200).json(post);
+		})
+		.catch((err) => {
+			res.status(404).json({ message: 'Error post does not exist' }, err);
 		});
 }

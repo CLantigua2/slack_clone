@@ -59,9 +59,10 @@ export function handleChange(e) {
 // handls user sign in from the front page
 export function signIn(e) {
 	e.preventDefault();
+	this.setState({ loading: true });
 	const { userLog, passLog } = this.state;
 	if (userLog === '' || passLog === '') {
-		alert('username and password is required');
+		this.setState({ loading: false, incorrect: 'Please provide a username and password' });
 	} else {
 		axios
 			.post(endpoint + 'login', { username: userLog, password: passLog })
@@ -80,16 +81,17 @@ export function signIn(e) {
 					});
 				} else {
 					// don't allow access
-					this.setState({ loggedIn: false });
+					this.setState({ loggedIn: false, loading: false });
 					throw new Error();
 				}
 			})
 			.then((res) => {
 				// blanks out the origin login fields
-				this.setState({ userLog: '', passLog: '', loggedIn: true });
+				this.setState({ userLog: '', passLog: '', loggedIn: true, loading: false });
 			})
 			.catch((err) => {
-				console.log('ERROR', err);
+				this.setState({ loading: false, incorrect: 'Incorrect username or password' });
+				console.dir('ERROR', err);
 			});
 	}
 }
@@ -116,25 +118,38 @@ export function getAllUsers() {
 // sends user register name and email to server
 export function registerUser(e) {
 	e.preventDefault();
+	this.setState({ loading: true });
 	const { username, password, firstname, lastname } = this.state;
-
 	if (!username || !password || !firstname || !lastname) {
 		alert('Please enter all of your information');
+		this.setState({ loading: false });
 	} else {
 		axios
 			.post(`${endpoint}register`, { username, password, firstname, lastname })
 			.then((res) => {
-				if (res.status === 201) {
+				if (res.status === 201 && res.data) {
 					this.setState({
-						username: '',
-						password: '',
-						firstname: '',
-						lastname: '',
-						loggedIn: true
+						userStuff: {
+							username,
+							password,
+							firstname,
+							lastname
+						},
+						loading: false
 					});
 				} else {
 					throw new Error('its broken');
 				}
+			})
+			.then(() => {
+				this.setState({
+					username: '',
+					password: '',
+					firstname: '',
+					lastname: '',
+					loggedIn: true,
+					loading: false
+				});
 			})
 			.catch((err) => {
 				this.setState({

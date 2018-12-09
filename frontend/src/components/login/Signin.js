@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SlackImage from './home_illo.png';
 import { Link, Redirect } from 'react-router-dom';
 import Button from '../tools/Button';
+import Spinner from '../loading/spinner';
 
 // home page form
 class Signin extends React.Component {
@@ -11,7 +12,7 @@ class Signin extends React.Component {
 
 	render() {
 		// all of this is coming from the context store
-		const { handleChange, userLog, passLog, signIn, loggedIn } = this.props;
+		const { handleChange, userLog, passLog, signIn, loggedIn, loading } = this.props;
 		if (loggedIn) {
 			return <Redirect to="/slackapp" />;
 		}
@@ -43,7 +44,7 @@ class Signin extends React.Component {
 						onChange={handleChange}
 					/>
 					<div>
-						<Button>Login</Button>
+						<Button>{loading === false ? 'Login' : <Spinner />}</Button>
 						{/* sidebarHandler posts registration data to the server || currently being worked on */}
 						<StyledRegister to="/register">
 							<span>Register</span>

@@ -34,6 +34,6 @@ export default connectStore(withRouter(SlackContainer));
 const StyledContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 80%;
+	width: 81%;
 	margin-left: 220px;
 `;

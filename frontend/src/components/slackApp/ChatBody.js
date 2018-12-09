@@ -7,9 +7,9 @@ class ChatBody extends React.Component {
 		const { channel } = this.props;
 		if (channel.length === 0) {
 			return (
-				<div>
+				<StyledDiv>
 					<h1>Click a channel from the side menu please.</h1>
-				</div>
+				</StyledDiv>
 			);
 		} else {
 			return channel.map((chan) => {
@@ -24,6 +24,8 @@ class ChatBody extends React.Component {
 }
 
 export default connectStore(ChatBody);
+
+const StyledDiv = styled.div`width: 60%;`;
 
 const StyledPTag = styled.p`
 	margin: 0;
