@@ -7,7 +7,7 @@ const sessSecret = process.env.SESSION_SECRET;
 const sessName = process.env.SESSION_NAME;
 
 // import custom middleware
-const restricted = require('./middleware.js');
+const { restricted } = require('./middleware.js');
 
 // exported routes with their functions
 module.exports = (server) => {
@@ -16,28 +16,28 @@ module.exports = (server) => {
 	server.post('/api/register', register);
 	server.post('/api/login', login);
 	server.get('/api/logout', logout);
-	server.get('/api/users', getUsers);
+	server.get('/api/users', restricted, getUsers);
 	server.get('/api/user/:username', getSingleUser);
 	// channel helpers
-	server.get('/api/channels', getChannels);
-	server.post('/api/createchannel', createChannel);
-	server.get('/api/channels/:channel', getAChannel);
+	server.get('/api/channels', restricted, getChannels);
+	server.post('/api/createchannel', restricted, createChannel);
+	server.get('/api/channels/:channel', restricted, getAChannel);
 	// post helpers
-	server.post('/api/makepost', makePost);
-	server.get('/api/posts', getPosts);
-	server.get('/api/post/:id', getPost);
+	server.post('/api/makepost', restricted, makePost);
+	server.get('/api/posts', restricted, getPosts);
+	server.get('/api/post/:id', restricted, getPost);
 };
 
 ///////////// session config ///////////////////////
 const sessionConfig = {
-	secret: `${process.env.SESSION_SECRET}`,
-	name: `${process.env.SESSION_NAME}`, // defaults to connect.sid
+	secret: sessSecret,
+	name: sessName, // defaults to connect.sid
 	httpOnly: true, // JS can't access, only https
 	resave: false,
 	saveUninitialized: false, // has something to do with foreign laws
 	cookie: {
 		secure: false, // over http(S) in production change to true
-		maxAge: 1000 * 60 * 5
+		maxAge: 1000 * 60 * 5 // time before the cookie expires
 	},
 	store: new knexSessionStore({
 		// creates memcache
@@ -107,6 +107,7 @@ function logout(req, res) {
 function getUsers(req, res) {
 	db('users')
 		// show user id, username, first and lastname ONLY
+
 		.select('id', 'username', 'firstname', 'lastname')
 		.then((users) => {
 			res.json(users);

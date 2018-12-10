@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const endpoint = 'http://localhost:9000/api/';
-
+axios.defaults.withCrdentials = true;
 //////////////////////// User actions //////////////////////////
 
 export function authenticate() {
