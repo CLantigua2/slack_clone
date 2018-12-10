@@ -37,7 +37,7 @@ const sessionConfig = {
 	saveUninitialized: false, // has something to do with foreign laws
 	cookie: {
 		secure: false, // over http(S) in production change to true
-		maxAge: 1000 * 60 * 5 // time before the cookie expires
+		maxAge: 1000 * 60 * 1 // time before the cookie expires
 	},
 	store: new knexSessionStore({
 		// creates memcache
@@ -61,6 +61,7 @@ function register(req, res) {
 	db('users')
 		.insert(creds)
 		.then((ids) => {
+			req.session.username = user.username;
 			res.status(201).json(ids);
 		})
 		.catch((err) => res.status(400).json(err));
@@ -78,7 +79,7 @@ function login(req, res) {
 			// compare password in db with input password
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
 				// give the user a token to be used for access in cookie
-				req.session.id = user.id;
+				req.session.username = user.username;
 				res.status(200).json({ ...user });
 			} else {
 				// this.props.history.push('/');
