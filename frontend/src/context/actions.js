@@ -67,16 +67,13 @@ export function signIn(e) {
 		axios
 			.post(endpoint + 'login', { username: userLog, password: passLog })
 			.then((res) => {
-				const { username, firstname, lastname, id } = res.data;
 				if (res.status === 200 && res.data) {
-					localStorage.setItem('jwt', res.data);
 					// keeps loggedin users info in state
+
+					// localStorage.setItem(('user', JSON.stringify(res.data)));
 					this.setState({
 						userStuff: {
-							username,
-							firstname,
-							lastname,
-							id
+							...res.data
 						}
 					});
 				} else {
@@ -103,7 +100,6 @@ export function getAllUsers() {
 		.get(`${endpoint}users`)
 		.then((res) => {
 			if (res.data.token) {
-				localStorage.getItem('jwt', res.data.token);
 				this.setState({ allUsers: res.data, userStuff: res.data.token.username });
 			} else {
 				return null;

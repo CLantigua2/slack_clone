@@ -1,14 +1,21 @@
 const db = require('../data/dbConfig'); // database
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
+const session = require('express-session'); // brints in session library
+const knexSessionStore = require('connect-session-knex')(session);
+const sessSecret = process.env.SESSION_SECRET;
+const sessName = process.env.SESSION_NAME;
 
 // import custom middleware
-const { authenticate, generateToken } = require('./middleware.js');
+const restricted = require('./middleware.js');
 
 // exported routes with their functions
 module.exports = (server) => {
+	server.use(session(sessionConfig));
 	// user helpers
 	server.post('/api/register', register);
 	server.post('/api/login', login);
+	server.get('/api/logout', logout);
 	server.get('/api/users', getUsers);
 	server.get('/api/user/:username', getSingleUser);
 	// channel helpers
@@ -21,13 +28,34 @@ module.exports = (server) => {
 	server.get('/api/post/:id', getPost);
 };
 
+///////////// session config ///////////////////////
+const sessionConfig = {
+	secret: `${process.env.SESSION_SECRET}`,
+	name: `${process.env.SESSION_NAME}`, // defaults to connect.sid
+	httpOnly: true, // JS can't access, only https
+	resave: false,
+	saveUninitialized: false, // has something to do with foreign laws
+	cookie: {
+		secure: false, // over http(S) in production change to true
+		maxAge: 1000 * 60 * 5
+	},
+	store: new knexSessionStore({
+		// creates memcache
+		tablename: 'sessions', // session table name
+		sidfiledname: 'sid', //session field name
+		knex: db, // what database you want to knex to use
+		createtable: true, // have the library create the table if there isn't one
+		clearInterval: 1000 * 60 * 60 // clear every hour
+	})
+};
+
 //////////////////// USER ROUTES ////////////////////////////////
 
 // for user registration
 function register(req, res) {
 	const creds = req.body;
 	// encrypt user password
-	const hash = bcrypt.hashSync(creds.password, 16);
+	const hash = bcrypt.hashSync(creds.password, 10);
 	// maintain the encrypted password
 	creds.password = hash;
 	db('users')
@@ -50,16 +78,29 @@ function login(req, res) {
 			// compare password in db with input password
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
 				// give the user a token to be used for access in cookie
-				const token = generateToken(user);
-				res.status(200).json({ ...user, token });
+				req.session.id = user.id;
+				res.status(200).json({ ...user });
 			} else {
-				this.props.history.push('/');
+				// this.props.history.push('/');
 				res.status(401).json({ message: 'you shall not pass!!' });
 			}
 		})
 		.catch((err) => {
 			res.status(500).json({ message: 'There was an error', err });
 		});
+}
+
+// logout
+function logout(req, res) {
+	if (req.session) {
+		req.session.destroy((err) => {
+			if (err) {
+				res.send('you can never logout');
+			} else {
+				res.send('you have logged out');
+			}
+		});
+	}
 }
 
 // for getting a list of users

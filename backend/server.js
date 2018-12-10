@@ -2,11 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const configureRoutes = require('./config/routes');
-const server = express();
 
+const server = express();
 server.use(express.json());
 server.use(cors());
 server.use(helmet());
+// wires up session management
 
 //test server
 server.get('/', (req, res) => {

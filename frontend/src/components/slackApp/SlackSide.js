@@ -188,17 +188,6 @@ const StyledButtonCont = styled.div`
 	color: #2abec7;
 `;
 
-const StyledTools = styled.button`
-	font-weight: bold;
-	display: flex;
-	justify-content: flex-start;
-	background: transparent;
-	border: 0;
-	font-size: 17px;
-	margin: 3px 0;
-	color: #2abec7;
-`;
-
 const StyledToolDiv = styled.div`
 	display: flex;
 	flex-direction: row;
